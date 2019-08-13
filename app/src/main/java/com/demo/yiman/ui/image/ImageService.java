@@ -50,7 +50,6 @@ public class ImageService extends IntentService {
         }
         for (ImageModle.ResultsBean results : imageDatas) {
             Bitmap bitmap = ImageLoaderUtil.load(this, results.getUrl());
-            Log.e("xx我想看看",results.getUrl().toString());
             if (bitmap != null) {
                 results.setWidth(bitmap.getWidth());
                 results.setHeight(bitmap.getHeight());

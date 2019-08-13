@@ -1,6 +1,6 @@
 # yiman
 
-yiman是一款使用 MVP + Retrofit2 + Rxjava + Event 等框架开发的阅读软件。
+yiman是一款使用 MVP + Retrofit2 + Rxjava + EventBus 等框架开发的阅读软件。
 包括新闻、图片、段子视频模块，项目的大部分功能已经完成。
 
 ## 目的

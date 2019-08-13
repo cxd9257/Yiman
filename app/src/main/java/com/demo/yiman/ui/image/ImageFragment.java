@@ -1,12 +1,14 @@
 package com.demo.yiman.ui.image;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.demo.yiman.R;
@@ -38,6 +40,10 @@ public class ImageFragment extends BaseFragment<ImagePresenter> implements Image
     PtrClassicFrameLayout mPtrClassicFrameLayout;
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.tv_title)
+    TextView mTitle;
     private ImageAdapter mAdapter;
     private List<ImageModle.ResultsBean> mList = new ArrayList<>();;
     private int count=10;
@@ -64,13 +70,13 @@ public class ImageFragment extends BaseFragment<ImagePresenter> implements Image
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         super.bindView(view, savedInstanceState);
+        initToolbar();//暂时没有对Toolbar进行封装
         mPtrClassicFrameLayout.disableWhenHorizontalMove(true);
         mPtrClassicFrameLayout.setPtrHandler(new PtrHandler() {
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
                 return PtrDefaultHandler.checkContentCanBePulledDown(frame,mRecyclerView,header);
             }
-
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 isLoadMore = false;
@@ -101,6 +107,14 @@ public class ImageFragment extends BaseFragment<ImagePresenter> implements Image
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    private void initToolbar() {
+        AppCompatActivity mAppCompatActivity = (AppCompatActivity) mContext;
+        mAppCompatActivity.setSupportActionBar(mToolbar);
+        mToolbar.setTitle("");
+        mTitle.setTextColor(Color.WHITE);
+        mTitle.setText(getResources().getString(R.string.title_image));
+    }
+
     @Override
     public void initData() {
         super.initData();
@@ -121,8 +135,7 @@ public class ImageFragment extends BaseFragment<ImagePresenter> implements Image
         if (imageModle == null || imageModle.getResults().size() == 0){
             showError(String.valueOf(imageModle.isError()));
         }else {
-            //开启服务去计算图片宽高。
-            page++;
+            page++; //开启服务去计算图片宽高。
             ImageService.startService(mContext,imageModle,"aaa");
             //mAdapter.setNewData(iamgeModle.getResults());
         }
@@ -138,7 +151,6 @@ public class ImageFragment extends BaseFragment<ImagePresenter> implements Image
 
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onEvent(List<ImageModle.ResultsBean> imageData){
-        Log.e("加入幾條數據",imageData.size()+"");
             mList.addAll(imageData);
             setData(imageData);
 }
@@ -148,23 +160,20 @@ public class ImageFragment extends BaseFragment<ImagePresenter> implements Image
             if (data.size() == 0) {
                 mAdapter.loadMoreFail();
             } else {
-                Log.e("xx","喜歡");
-
                 mAdapter.addData(data);
             }
         } else {
-            Log.e("xx","e喜歡");
             mAdapter.setNewData(data);
             mPtrClassicFrameLayout.refreshComplete();
         }
 
-        if (count < 10) {
-            //第一页如果不够一页就不显示没有更多数据布局
+        if (count < 10) { //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(!isLoadMore);
         } else {
             mAdapter.loadMoreComplete();
             mPtrClassicFrameLayout.refreshComplete();
         }
+        mAdapter.notifyDataSetChanged();
     }
     @Override
     public void onDestroyView() {

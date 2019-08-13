@@ -32,7 +32,7 @@ public class FindsFragment extends BaseFragment {
     @BindView(R.id.cl_second)
     ConstraintLayout mGame;
     @BindView(R.id.toolbar)
-    Toolbar mmToolbar;
+    Toolbar mToolbar;
     @BindView(R.id.tv_title)
     TextView mTitle;
     @BindView(R.id.fake_status_bar)
@@ -66,8 +66,8 @@ public class FindsFragment extends BaseFragment {
     }
     private void initToolbar() {
         AppCompatActivity mAppCompatActivity = (AppCompatActivity) mContext;
-        mAppCompatActivity.setSupportActionBar(mmToolbar);
-        mmToolbar.setTitle("");
+        mAppCompatActivity.setSupportActionBar(mToolbar);
+        mToolbar.setTitle("");
         mTitle.setTextColor(Color.WHITE);
         mTitle.setText(getResources().getString(R.string.title_find));
 

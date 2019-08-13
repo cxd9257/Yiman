@@ -25,10 +25,8 @@ import com.demo.yiman.utils.ToolUtil;
 import com.demo.yiman.widget.ChannelDialogFragment;
 import com.demo.yiman.widget.CustomNestedScrollView;
 import com.demo.yiman.widget.CustomViewPager;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -39,14 +37,12 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     CustomViewPager mViewPager;
     @BindView(R.id.SlidingTabLayout)
     com.flyco.tablayout.SlidingTabLayout mSlidingTabLayout;
-    @BindView(R.id.SlidingTabLayoutTitle)
+    @BindView(R.id.SlidingTabLayoutTitle)//用于划动隐藏显示指示器
     com.flyco.tablayout.SlidingTabLayout mSlidingTabLayoutTitle;
     @BindView(R.id.nes_scroll_view)
     CustomNestedScrollView mScrollView;
     @BindView(R.id.ll_search_title)
     RelativeLayout mRelativeLayoutSearch;
-    @BindView(R.id.ll_xxxx)
-    RelativeLayout mLinearLayoutXXXX;
     @BindView(R.id.gv_top_content)
     GridView mGridViewNewTop;
     @BindView(R.id.ib_add)
@@ -74,16 +70,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         super.bindView(view, savedInstanceState);
-        mToolbar.setTitle("38℃");//天气度数
-        mToolbar.setTitleTextColor(Color.WHITE);
-        AppCompatActivity mAppCompatActivity = (AppCompatActivity) mContext;
-        mAppCompatActivity.setSupportActionBar(mToolbar);
-        mToolbar.post(new Runnable() {
-            @Override
-            public void run() {
-                dealWithViewPager();
-            }
-        });
+        initToolbar(); //暂时没有对Toolbar进行封装
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             int lastScrollY=0;
             int h = ToolUtil.dip2px(200,mContext);
@@ -122,6 +109,19 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
             }
         });
 
+    }
+
+    private void initToolbar() {
+        mToolbar.setTitle("38℃");//天气度数
+        mToolbar.setTitleTextColor(Color.WHITE);
+        AppCompatActivity mAppCompatActivity = (AppCompatActivity) mContext;
+        mAppCompatActivity.setSupportActionBar(mToolbar);
+        mToolbar.post(new Runnable() {
+            @Override
+            public void run() {
+                dealWithViewPager();
+            }
+        });
     }
 
     @Override
