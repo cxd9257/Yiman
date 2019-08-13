@@ -1,53 +1,38 @@
 package com.demo.yiman.ui.news;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.style.LineHeightSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.demo.yiman.R;
 import com.demo.yiman.base.BaseFragment;
 import com.demo.yiman.bean.Channel;
 import com.demo.yiman.bean.NewTopBean;
 import com.demo.yiman.ui.adapter.ChannelPagerAdapter;
 import com.demo.yiman.ui.adapter.NewTopDataAdapter;
-import com.demo.yiman.utils.ImageLoaderUtil;
 import com.demo.yiman.utils.ScreenUtil;
-import com.demo.yiman.utils.StatusBarUtil;
 import com.demo.yiman.utils.ToolUtil;
 import com.demo.yiman.widget.ChannelDialogFragment;
-import com.demo.yiman.widget.CircleImageView;
 import com.demo.yiman.widget.CustomNestedScrollView;
 import com.demo.yiman.widget.CustomViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsView {
+public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements NewsView {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.viewPager)
@@ -89,7 +74,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsVie
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         super.bindView(view, savedInstanceState);
-        mToolbar.setTitle("38℃");
+        mToolbar.setTitle("38℃");//天气度数
         mToolbar.setTitleTextColor(Color.WHITE);
         AppCompatActivity mAppCompatActivity = (AppCompatActivity) mContext;
         mAppCompatActivity.setSupportActionBar(mToolbar);
@@ -117,26 +102,10 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsVie
                     mImageAddTitle.setVisibility(View.GONE);
                     mScrollView.setNeedScroll(true);
                 }
-
-//                if (lastScrollY < h) {
-//                    scrollY = Math.min(h, scrollY);
-//                    mScrollY = scrollY > h ? h : scrollY;
-//                    buttonBarLayout.setAlpha(1f * mScrollY / h);
-//                    toolbar.setBackgroundColor(((255 * mScrollY / h) << 24) | color);
-//                    ivHeader.setTranslationY(mOffset - mScrollY);
-//                }
-//                if (scrollY == 0) {
-//                    ivBack.setImageResource(R.drawable.back_white);
-//                    ivMenu.setImageResource(R.drawable.icon_menu_white);
-//                } else {
-//                    ivBack.setImageResource(R.drawable.back_black);
-//                    ivMenu.setImageResource(R.drawable.icon_menu_black);
-//                }
-
                 lastScrollY = scrollY;
             }
         });
-        //mToolbar.setBackgroundColor(0);
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -158,9 +127,6 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsVie
     @Override
     public void initData() {
         super.initData();
-        //获取数据
-        //mPresenter.getBaseView();
-
         initTopData();
         mNewTopDataAdapter = new NewTopDataAdapter(mContext,mNewTopData);
         mGridViewNewTop.setAdapter(mNewTopDataAdapter);
@@ -170,10 +136,9 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsVie
     }
 
     @Override
-    protected NewsPresenter createPresenter() {
-        return new NewsPresenter(this);
+    protected NewsChannelPresenter createPresenter() {
+        return new NewsChannelPresenter(this);
     }
-
 
     @Override
     public void onNewsSucc() {
@@ -204,16 +169,15 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsVie
     }
 
     private void dealWithViewPager() {
-        //+ ToolUtil.getStateBarHeight(getActivity())
         toolBarPositionY = mToolbar.getHeight()+ ToolUtil.getStateBarHeight(getActivity());
         ViewGroup.LayoutParams params = mViewPager.getLayoutParams();
         params.height = ScreenUtil.getScreenHeightPx(mContext)-toolBarPositionY-mSlidingTabLayout.getHeight()-ToolUtil.getStateBarHeight(getActivity())+1;
         mViewPager.setLayoutParams(params);
         Log.e("ViewPager高",params.height+"");
     }
-/**
- * 模拟获取头部目录
- */
+    /**
+     * 获取头部目录，图片地址是自己搭建的
+     */
     private void initTopData(){
         mNewTopData = new ArrayList<>();
         String[] nameList = new String[]{"直播","小说","漫画","想听FM","游戏","百度",
@@ -236,22 +200,22 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsVie
             newTopBean.setImageUrl(imageList[i]);
             mNewTopData.add(newTopBean);
         }
-
     }
-
 
     @OnClick({R.id.ib_add,R.id.ib_add_title})
     public void onViewClicked(View view){
         switch (view.getId()){
             case R.id.ib_add:
-                ChannelDialogFragment channelDialogFragment =  ChannelDialogFragment.newInstance(mSelectedData,mUnSelectedData);
-                channelDialogFragment.show(getChildFragmentManager(),"CHANNEL");
+                startChannelDialog();
                 break;
             case R.id.ib_add_title:
-                ChannelDialogFragment channelDialogFragment1 =  ChannelDialogFragment.newInstance(mSelectedData,mUnSelectedData);
-                channelDialogFragment1.show(getChildFragmentManager(),"CHANNEL");
+                startChannelDialog();
                 break;
         }
+    }
+    private void startChannelDialog(){
+        ChannelDialogFragment channelDialogFragment =  ChannelDialogFragment.newInstance(mSelectedData,mUnSelectedData);
+        channelDialogFragment.show(getChildFragmentManager(),"CHANNEL");
     }
 
 }

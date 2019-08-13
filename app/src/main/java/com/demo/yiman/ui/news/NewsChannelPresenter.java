@@ -14,10 +14,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class NewsPresenter extends BasePresenter<NewsView> implements NewsContract{
+public class NewsChannelPresenter extends BasePresenter<NewsView> implements NewsContract{
 
 
-    public NewsPresenter(NewsView baseView) {
+    public NewsChannelPresenter(NewsView baseView) {
         super(baseView);
     }
 
