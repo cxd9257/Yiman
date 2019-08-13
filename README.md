@@ -7,7 +7,7 @@ yiman是一款使用 MVP + Retrofit2 + Rxjava + Event 等框架开发的阅读�
 初学者一起探讨学习，对性能优化、代码编写尽可能标准、朝标准APP不断完善改进
 
 ## 感谢
-[Will-Ls神](https://github.com/Will-Ls/WeiYueKotlin)
+[Will-Ls神](https://github.com/Will-Ls/WeiYueKotlin)、
 [Link-996神](https://www.jianshu.com/p/da8a01d4548a)
 等开源大神
 [矢量图标来自阿里](https://www.iconfont.cn)
