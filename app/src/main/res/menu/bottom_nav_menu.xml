@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_new"
+        android:icon="@drawable/ic_menu_new"
+        android:title="@string/title_news" />
+
+    <item
+        android:id="@+id/navigation_video"
+        android:icon="@drawable/ic_video"
+        android:title="@string/title_image" />
+
+    <item
+        android:id="@+id/navigation_jc"
+        android:icon="@drawable/ic_jc"
+        android:title="@string/title_find" />
+    <item
+        android:id="@+id/navigation_joke"
+        android:icon="@drawable/ic_age"
+        android:title="@string/title_age" />
+    <item
+        android:id="@+id/navigation_me"
+        android:icon="@drawable/ic_me"
+        android:title="@string/title_me" />
+
+</menu>

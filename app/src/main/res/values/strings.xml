@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Yiman</string>
+    <string name="title_news">新闻</string>
+    <string name="title_image">图片</string>
+    <string name="title_find">发现</string>
+    <string name="title_age">煎蛋</string>
+    <string name="title_me">我</string>
+    <string name="ad_dj">中人的人东三里社区在AD卡记得叫发发得发非佛啊打飞机奥尔无法DJ哦无法</string>
+    <string name="go_set">前往设置></string>
+    <string name="set">设置</string>
+    <string name="set_describe">打开/关闭发现页的入口</string>
+
+    <string name="find_shop">购物</string>
+    <string name="find_game">游戏</string>
+
+    <string name="about">关于</string>
+    <string name="share">分享</string>
+    <string name="set_btn">发现页管理</string>
+    <string name="Thanks">感谢</string>
+
+    <string name="willUrl">https://blog.csdn.net/cxd520123</string>
+    <string name="githubUrl">https://github.com/cxd9257/yiman</string>
+    <string name="emaillUrl">9257cxd@126.com</string>
+    <string name="thankUrl">https://github.com/Will-Ls</string>
+    <string name="comment_hint">亲，说两句</string>
+    <string name="search_hint">搜免费小说 影视 游戏 App</string>>
+
+    <string name="channel_title">频道管理</string>>
+
+
+    <string-array name="news_channel_name">
+        <item>头条</item>
+        <item>社会</item>
+        <item>国内</item>
+        <item>国际</item>
+        <item>娱乐</item>
+        <item>体育</item>
+        <item>军事</item>
+        <item>科技</item>
+        <item>财经</item>
+        <item>时尚</item>
+    </string-array>
+
+    <string-array name="news_channel_id">
+        <item>top</item>
+        <item>shehui</item>
+        <item>guonei</item>
+        <item>guoji</item>
+        <item>yule</item>
+        <item>tiyu</item>
+        <item>junshi</item>
+        <item>keji</item>
+        <item>caijing</item>
+        <item>shishang</item>
+    </string-array>
+
+
+    <string name="news_tips">已为您推荐了%1$s条新资讯</string>
+</resources>

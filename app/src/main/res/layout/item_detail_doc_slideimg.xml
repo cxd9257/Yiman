@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/tv_news_title"
+        style="@style/text_Title"
+        android:maxLines="2"
+        android:text="@string/ad_dj"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.demo.yiman.widget.CustomRoundAngleImageView
+        android:id="@+id/iv_news_1"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/bg_images"
+        app:radius="6dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/iv_news_2"
+        app:layout_constraintTop_toBottomOf="@id/tv_news_title" />
+
+    <com.demo.yiman.widget.CustomRoundAngleImageView
+        android:id="@+id/iv_news_2"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_margin="4dp"
+        android:background="@color/bg_images"
+        app:radius="6dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/iv_news_1"
+        app:layout_constraintRight_toLeftOf="@id/iv_news_3"
+        app:layout_constraintTop_toBottomOf="@id/tv_news_title" />
+
+    <com.demo.yiman.widget.CustomRoundAngleImageView
+        android:id="@+id/iv_news_3"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/bg_images"
+        app:radius="6dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/iv_news_2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_news_title" />
+
+    <TextView
+        android:id="@+id/tv_news_source"
+        style="@style/Text_Tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="556"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_news_1" />
+
+    <TextView
+        android:id="@+id/tv_news_date"
+        style="@style/Text_Tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="556"
+        app:layout_constraintTop_toTopOf="@+id/tv_news_source"
+        app:layout_constraintLeft_toRightOf="@id/tv_news_source"
+        app:layout_constraintTop_toBottomOf="@id/iv_news_1" />
+
+    <ImageView
+        android:id="@+id/iv_news_close"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_news_close"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_news_source"
+        app:layout_constraintTop_toBottomOf="@id/iv_news_1" />
+
+
+</android.support.constraint.ConstraintLayout>

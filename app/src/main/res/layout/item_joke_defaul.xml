@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+    <!--尝试在同xml引用四种布局
+    txt,image,gif,video-->
+    <com.demo.yiman.widget.CircleImageView
+        android:id="@+id/iv_header"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/text_Name"
+        android:layout_marginLeft="10dp"
+        android:text="姓名"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iv_header"
+        app:layout_constraintLeft_toRightOf="@+id/iv_header"
+        app:layout_constraintTop_toTopOf="@id/iv_header" />
+
+    <TextView
+        android:id="@+id/tv_context"
+        style="@style/text_Title"
+        android:layout_marginTop="10dp"
+        android:maxLines="8"
+        android:text="姓名adadadfaweofjaldjkfaoejfajkefaeofjaefjaoefjaoiefjaoeijfaoeijfaoiefjaoiwefjaowefjawojfawe"
+        app:layout_constraintStart_toStartOf="@+id/iv_header"
+        app:layout_constraintTop_toBottomOf="@id/iv_header" />
+
+    <include
+        android:id="@+id/include_context"
+        layout="@layout/layout_joke_context" />
+
+    <TextView
+        android:id="@+id/tv_smile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_smile"
+        android:drawablePadding="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="255"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@id/iv_header"
+        app:layout_constraintTop_toBottomOf="@id/include_context" />
+
+    <TextView
+        android:id="@+id/tv_cry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:drawableLeft="@drawable/icon_cry"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:text="255"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_smile"
+        app:layout_constraintLeft_toRightOf="@+id/tv_smile"
+        app:layout_constraintTop_toTopOf="@+id/tv_smile" />
+
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:drawableLeft="@drawable/icon_comment"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:text="255"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_smile"
+        app:layout_constraintLeft_toRightOf="@+id/tv_cry"
+        app:layout_constraintTop_toTopOf="@+id/tv_smile" />
+
+    <TextView
+        android:id="@+id/tv_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:drawableLeft="@drawable/icon_share"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:text="@string/share"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_smile"
+        app:layout_constraintLeft_toRightOf="@+id/tv_comment"
+        app:layout_constraintTop_toTopOf="@+id/tv_smile" />
+    <!--可以直接在java代码中动态修改-->
+    <TextView
+        android:id="@+id/tv_top_name"
+        style="@style/text_Name"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/icon_god_comment"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:text="姓名:"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cry" />
+
+    <TextView
+        android:id="@+id/tv_top_comment"
+        style="@style/text_Name"
+        android:layout_marginLeft="5dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:minHeight="20dp"
+        android:text="姓名xq 我有xxdadadakdjaofijeoijfadfjakdajofdaoifjaekjfaoeifjakdjfaoiejafekadsofaeawfeaw"
+        app:layout_constraintLeft_toRightOf="@+id/tv_top_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_top_name" />
+
+</android.support.constraint.ConstraintLayout>

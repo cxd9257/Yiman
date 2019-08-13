@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_view_height"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/cl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fake_status_bar">
+
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:elevation="0dp">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_scrollFlags="scroll|enterAlways"/>
+                <RelativeLayout
+                    android:id="@+id/ll_xxxx"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:focusable="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:background="@drawable/ll_customer_search"
+                    android:focusableInTouchMode="true" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/icon_search"
+                        android:textSize="17sp"
+                        android:text="@string/search_hint"/>
+                    <ImageView
+                        android:id="@+id/iv_voice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:layout_toLeftOf="@+id/iv_code"
+                        android:src="@drawable/icon_voice"/>
+                    <ImageView
+                        android:id="@+id/iv_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/icon_code"/>
+                </RelativeLayout>
+
+            </android.support.design.widget.AppBarLayout>
+        <com.demo.yiman.widget.CustomNestedScrollView
+            android:id="@+id/nes_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_top">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:background="@color/bg_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <GridView
+                        android:id="@+id/gv_top_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:columnWidth="20dp"
+                        android:layout_gravity="center"
+                        android:horizontalSpacing="10dp"
+                        android:numColumns="6"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="10dp">
+                    </GridView>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal">
+
+                    <com.flyco.tablayout.SlidingTabLayout
+                        xmlns:tl="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/SlidingTabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginRight="50dp"
+                        android:background="@color/bg_content"
+                        tl:tl_indicator_color="@color/colorPrimary"
+                        tl:tl_textSelectColor="@android:color/black"
+                        tl:tl_textUnselectColor="@color/bg_back"
+                        tl:tl_indicator_width="30dp"
+                        tl:tl_textsize="16sp">
+
+                    </com.flyco.tablayout.SlidingTabLayout>
+
+                    <ImageButton
+                        android:id="@+id/ib_add"
+                        android:layout_width="50dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:background="@color/bg_content"
+                        android:src="@drawable/ic_news_add" />
+                </RelativeLayout>
+
+                <com.demo.yiman.widget.CustomViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/SlidingTabLayout"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </com.demo.yiman.widget.CustomViewPager>
+            </LinearLayout>
+        </com.demo.yiman.widget.CustomNestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/fake_status_bar"
+        android:layout_marginTop="60dp">
+        <RelativeLayout
+            android:id="@+id/ll_search_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:focusable="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:background="@drawable/ll_customer_search"
+            android:focusableInTouchMode="true" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/icon_search"
+                android:textSize="17sp"
+                android:text="@string/search_hint"/>
+            <ImageView
+                android:id="@+id/iv_voicex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="20dp"
+                android:layout_toLeftOf="@+id/iv_codex"
+                android:src="@drawable/icon_voice"/>
+            <ImageView
+                android:id="@+id/iv_codex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="20dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_code"/>
+        </RelativeLayout>
+        <!--<include layout="@layout/layout_toolbar"/>-->
+        <com.flyco.tablayout.SlidingTabLayout
+            xmlns:tl="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/SlidingTabLayoutTitle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/ll_search_title"
+            android:layout_marginRight="50dp"
+            android:visibility="gone"
+            android:background="@color/bg_content"
+            tl:tl_indicator_color="@color/colorPrimary"
+            tl:tl_textSelectColor="@android:color/black"
+            tl:tl_indicator_width="30dp"
+            tl:tl_textUnselectColor="@color/bg_back"
+            tl:tl_textsize="16sp"></com.flyco.tablayout.SlidingTabLayout>
+
+        <ImageButton
+            android:id="@+id/ib_add_title"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ll_search_title"
+            android:layout_gravity="center"
+            android:background="@color/bg_content"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_news_add"
+            android:visibility="gone" />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

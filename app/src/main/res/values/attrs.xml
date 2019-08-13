@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RadarView">
+        <attr name="num" format="integer|reference"/>
+        <attr name="radarGridColor" format="color|reference"/>
+        <attr name="radarGridStrokeWidth" format="dimension|reference"/>
+        <attr name="radarLineColor" format="color|reference"/>
+        <attr name="radarLineStrokeWidth" format="dimension|reference"/>
+        <attr name="circleColor" format="color|reference"/>
+        <attr name="circleWidth" format="dimension|reference"/>
+        <attr name="layerColor" format="color|reference"/>
+        <attr name="android:textSize" format="color|reference"/>
+        <attr name="android:textColor" format="dimension|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="Custom_Round_Image_View">
+        <attr name="radius" format="dimension"/>
+        <attr name="left_top_radius" format="dimension"/>
+        <attr name="right_top_radius" format="dimension"/>
+        <attr name="right_bottom_radius" format="dimension"/>
+        <attr name="left_bottom_radius" format="dimension"/>
+    </declare-styleable>
+    <style name="dialogSlideAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_slide_out</item>
+    </style>
+</resources>

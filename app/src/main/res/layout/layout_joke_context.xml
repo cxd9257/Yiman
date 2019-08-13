@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    app:layout_constraintTop_toBottomOf="@+id/tv_context"
+    >
+    <com.demo.yiman.widget.CustomRoundAngleImageView
+        android:id="@+id/iv_context"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:scaleType="fitXY"
+        app:radius="6dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/ll_context"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_smile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_context"
+        android:visibility="gone">
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/jz_video"
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+
+        </fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

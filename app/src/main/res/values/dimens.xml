@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="radarTextSize">12sp</dimen>
+    <dimen name="radarGridWidth">1dp</dimen>
+    <dimen name="radarLineStrokeWidth">1dp</dimen>
+    <dimen name="circleWidth">0dp</dimen>
+
+    <dimen name="statusbar_view_height">0dp</dimen>
+    <integer name="num">3</integer>
+</resources>
