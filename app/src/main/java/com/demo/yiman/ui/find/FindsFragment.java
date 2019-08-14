@@ -20,6 +20,7 @@ import com.demo.yiman.ui.SetActivity;
 import com.demo.yiman.ui.WebViewActivity;
 import com.demo.yiman.utils.AppConfig;
 import com.demo.yiman.utils.SharePrefUtil;
+import com.demo.yiman.utils.StatusBarUtil;
 
 import butterknife.BindView;
 
@@ -47,6 +48,7 @@ public class FindsFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //这只是针对6.0以上系统，没做过多适配
     }
 
     @Override
@@ -56,7 +58,7 @@ public class FindsFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_gues;
+        return R.layout.fragment_find;
     }
 
     @Override
@@ -68,7 +70,8 @@ public class FindsFragment extends BaseFragment {
         AppCompatActivity mAppCompatActivity = (AppCompatActivity) mContext;
         mAppCompatActivity.setSupportActionBar(mToolbar);
         mToolbar.setTitle("");
-        mTitle.setTextColor(Color.WHITE);
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.bg_theme));
+        mTitle.setTextColor(Color.BLACK);
         mTitle.setText(getResources().getString(R.string.title_find));
 
         ConstraintLayout.LayoutParams params=new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getStateBarHeight(getActivity()));

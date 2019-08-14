@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -20,6 +21,8 @@ import com.demo.yiman.ui.news.NewsFragment;
 import com.demo.yiman.utils.StatusBarUtil;
 
 
+import java.util.List;
+
 import butterknife.BindView;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
@@ -28,19 +31,11 @@ public class MainActivity extends BaseActivity {
     private SupportFragment[] mFragment = new SupportFragment[5];
     @BindView(R.id.nav_view)
     BottomNavigationView navView;
-    @Override
-    public void initView() {
-        super.initView();
-
-    }
 
     @Override
-    public void initData() {
-        super.initData();
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
-
-
-
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this,0,null);
@@ -65,7 +60,7 @@ public class MainActivity extends BaseActivity {
             mFragment[4] = findFragment(AboutFragment.class);
         }
         setFragmentPosition(0);
-
+        com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -76,38 +71,33 @@ public class MainActivity extends BaseActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_new:
                     setFragmentPosition(0);
+                    com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
                     break;
                 case R.id.navigation_video:
                     setFragmentPosition(1);
+                    com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
                     break;
                 case R.id.navigation_jc:
                     setFragmentPosition(2);
+                    com.jaeger.library.StatusBarUtil.setLightMode(MainActivity.this);
                     break;
                 case R.id.navigation_joke:
                     setFragmentPosition(3);
+                    com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
                     break;
                 case R.id.navigation_me:
                     setFragmentPosition(4);
-
+                    com.jaeger.library.StatusBarUtil.setLightMode(MainActivity.this);
                     break;
             }
             return true;
         }
     };
-    public static int getStateBarHeight(Activity a) {
-        int result = 0;
-        int resourceId = a.getResources().getIdentifier("status_bar_height",
-                "dimen", "android");
-        if (resourceId > 0) {
-            result = a.getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
+
     @Override
     protected BasePresenter createPresenter() {
         return null;
     }
-
 
     private void setFragmentPosition(int position){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -124,8 +114,13 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_main;
+    public void initView() {
+        super.initView();
+    }
+    
+    @Override
+    public void initData() {
+        super.initData();
     }
 
     @Override

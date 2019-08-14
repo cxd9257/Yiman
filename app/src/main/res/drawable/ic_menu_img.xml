@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:drawable="@drawable/ic_menu_img_select"></item>
-    <item android:drawable="@drawable/ic_menu_img"></item>
+    <item android:state_checked="true" android:drawable="@drawable/ic_menu_imgs_select"></item>
+    <item android:drawable="@drawable/ic_menu_imgs"></item>
 </selector>

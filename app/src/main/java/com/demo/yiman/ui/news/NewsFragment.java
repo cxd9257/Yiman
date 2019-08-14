@@ -7,7 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -18,6 +20,9 @@ import com.demo.yiman.R;
 import com.demo.yiman.base.BaseFragment;
 import com.demo.yiman.bean.Channel;
 import com.demo.yiman.bean.NewTopBean;
+import com.demo.yiman.database.ChannelDao;
+import com.demo.yiman.event.NewChannelEvent;
+import com.demo.yiman.event.SelectChannelEvent;
 import com.demo.yiman.ui.adapter.ChannelPagerAdapter;
 import com.demo.yiman.ui.adapter.NewTopDataAdapter;
 import com.demo.yiman.utils.ScreenUtil;
@@ -25,6 +30,11 @@ import com.demo.yiman.utils.ToolUtil;
 import com.demo.yiman.widget.ChannelDialogFragment;
 import com.demo.yiman.widget.CustomNestedScrollView;
 import com.demo.yiman.widget.CustomViewPager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -57,7 +67,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     private NewTopDataAdapter mNewTopDataAdapter;
     private int selectedIndex;
     private String selectedChannel;
-
+    private boolean isFirstLoading;
     public static NewsFragment newInstance(){
         Bundle args = new Bundle();
         NewsFragment fragment = new NewsFragment();
@@ -67,6 +77,15 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     public int getLayoutId() {
         return R.layout.fragment_news;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+    }
+
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         super.bindView(view, savedInstanceState);
@@ -158,10 +177,62 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
             mViewPager.setCurrentItem(0,false);
             mSlidingTabLayout.setViewPager(mViewPager);
             mSlidingTabLayoutTitle.setViewPager(mViewPager);
+        }else{
+            ShowToast("数据异常");
+        }
+
+    }
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void updateChannel(NewChannelEvent event){
+        if (event==null)return;
+        if (event.selectedDatas !=null && event.unSelectedDatas != null){
+            mSelectedData = event.selectedDatas;
+            mUnSelectedData = event.unSelectedDatas;
+            mChannelPagerAdapter.updataChannel(mSelectedData);
+            mSlidingTabLayout.notifyDataSetChanged();
+            ChannelDao.saveChannels(event.allChannels);
+
+            List<String> integers = new ArrayList<>();
+            for (Channel channel : mSelectedData) {
+                integers.add(channel.getChannelName());
+            }
+            if (TextUtils.isEmpty(event.firstChannelName)) {
+                if (!integers.contains(selectedChannel)) {
+                    selectedChannel = mSelectedData.get(selectedIndex).getChannelName();
+                    mViewPager.setCurrentItem(selectedIndex, false);
+                } else {
+                    setViewpagerPosition(integers, selectedChannel);
+                }
+            } else {
+                setViewpagerPosition(integers, event.firstChannelName);
+            }
         }
     }
-
-
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void selectChannelEvent(SelectChannelEvent selectChannelEvent) {
+        if (selectChannelEvent == null) return;
+        List<String> integers = new ArrayList<>();
+        for (Channel channel : mSelectedData) {
+            integers.add(channel.getChannelName());
+        }
+        setViewpagerPosition(integers, selectChannelEvent.channelName);
+    }
+    private void setViewpagerPosition(List<String> integers,String channelName){
+        if (TextUtils.isEmpty(channelName)||integers == null)return;
+        for (int j=0; j<integers.size(); j++){
+            if (integers.get(j).equals(channelName)){
+                selectedChannel = integers.get(j);
+                selectedIndex = j;
+                break;
+            }
+        }
+        mViewPager.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mViewPager.setCurrentItem(selectedIndex,false);
+            }
+        },100);
+    }
 
     @Override
     public void getChannel() {
@@ -218,4 +289,9 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         channelDialogFragment.show(getChildFragmentManager(),"CHANNEL");
     }
 
+    @Override
+    public void onDestroyView() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroyView();
+    }
 }

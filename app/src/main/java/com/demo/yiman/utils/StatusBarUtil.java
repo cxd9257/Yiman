@@ -40,6 +40,11 @@ public class StatusBarUtil {
         setColor(activity, color, DEFAULT_STATUS_BAR_ALPHA);
     }
 
+    public static void setLightMode(Activity activity){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+    }
     /**
      * 设置状态栏颜色
      *

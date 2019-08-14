@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.demo.yiman.MyApp;
 import com.demo.yiman.base.baseMVP.BaseModel;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.base.baseMVP.BaseView;
+import com.demo.yiman.utils.ShowToast;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -115,6 +117,9 @@ public abstract class BaseFragment<P extends BasePresenter> extends SupportFragm
         if (dialog!=null && dialog.isShowing()){
             dialog.dismiss();
         }
+    }
+    protected void ShowToast(String string){
+        ShowToast.showShort(MyApp.getContext(),string);
     }
     public void showToast(String msg){
         Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
