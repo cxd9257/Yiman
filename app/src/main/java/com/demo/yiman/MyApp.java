@@ -1,5 +1,6 @@
 package com.demo.yiman;
 
+import com.demo.yiman.database.YimanDbOpenHelper;
 import com.demo.yiman.utils.AppConfig;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -19,6 +20,7 @@ public class MyApp extends LitePalApplication {
         LitePal.initialize(this);
         Beta.autoCheckUpgrade = true;
         Bugly.init(getApplicationContext(), AppConfig.BUGLY_KEY,false);
+        YimanDbOpenHelper.initDataBase();
 
     }
 

@@ -1,4 +1,13 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+greendao {
+    schemaVersion 1//数据库版本号
+    daoPackage 'com.demo.yiman.database'//设置DaoMaster、DaoSession、Dao包名
+    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+    //targetGenDirTest：设置生成单元测试目录
+    //generateTests：设置自动生成单元测试用例
+}
+
 
 android {
     compileSdkVersion 28
@@ -61,6 +70,7 @@ dependencies {
     implementation 'com.airbnb.android:lottie:2.1.0'
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+    implementation 'org.greenrobot:greendao:3.2.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

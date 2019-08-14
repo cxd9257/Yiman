@@ -182,7 +182,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         }
 
     }
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)  //EventBus事件
     public void updateChannel(NewChannelEvent event){
         if (event==null)return;
         if (event.selectedDatas !=null && event.unSelectedDatas != null){
@@ -190,7 +190,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
             mUnSelectedData = event.unSelectedDatas;
             mChannelPagerAdapter.updataChannel(mSelectedData);
             mSlidingTabLayout.notifyDataSetChanged();
-            ChannelDao.saveChannels(event.allChannels);
+            ChannelDao.saveChannels(event.allChannels);  //拿到新数据后让指示器改变，并保存新数据
 
             List<String> integers = new ArrayList<>();
             for (Channel channel : mSelectedData) {
