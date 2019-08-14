@@ -14,8 +14,10 @@ import com.demo.yiman.base.BaseActivity;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.utils.AppConfig;
 import com.demo.yiman.utils.SharePrefUtil;
+import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class SetActivity extends BaseActivity {
     @BindView(R.id.sw_shop)
@@ -132,4 +134,9 @@ public class SetActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+    @OnClick(R.id.btn_update)
+    public void onClick(){
+        Beta.checkUpgrade();
+    }
+
 }

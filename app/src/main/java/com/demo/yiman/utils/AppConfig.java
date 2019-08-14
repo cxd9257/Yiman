@@ -9,7 +9,7 @@ public class AppConfig {
     public static final String ShopBtn = "shopbtn";
 
     public static final String share_pre_name = "name";
-
+    public static final String BUGLY_KEY = "99af23e8-8149-470b-8eba-55ad493b72e1";
 
 
     public static void setWebView(WebView webView){

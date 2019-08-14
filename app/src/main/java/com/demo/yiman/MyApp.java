@@ -1,5 +1,9 @@
 package com.demo.yiman;
 
+import com.demo.yiman.utils.AppConfig;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
+
 import org.litepal.LitePal;
 import org.litepal.LitePalApplication;
 
@@ -13,6 +17,9 @@ public class MyApp extends LitePalApplication {
         super.onCreate();
         BGASwipeBackHelper.init(this,null);
         LitePal.initialize(this);
+        Beta.autoCheckUpgrade = true;
+        Bugly.init(getApplicationContext(), AppConfig.BUGLY_KEY,false);
+
     }
 
     public synchronized static MyApp getInstance() {
