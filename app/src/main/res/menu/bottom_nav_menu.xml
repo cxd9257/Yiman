@@ -8,20 +8,20 @@
 
     <item
         android:id="@+id/navigation_video"
-        android:icon="@drawable/ic_video"
+        android:icon="@drawable/ic_menu_img"
         android:title="@string/title_image" />
 
     <item
         android:id="@+id/navigation_jc"
-        android:icon="@drawable/ic_jc"
+        android:icon="@drawable/ic_menu_find"
         android:title="@string/title_find" />
     <item
         android:id="@+id/navigation_joke"
-        android:icon="@drawable/ic_age"
+        android:icon="@drawable/ic_menu_smile"
         android:title="@string/title_age" />
     <item
         android:id="@+id/navigation_me"
-        android:icon="@drawable/ic_me"
+        android:icon="@drawable/ic_menu_me"
         android:title="@string/title_me" />
 
 </menu>
