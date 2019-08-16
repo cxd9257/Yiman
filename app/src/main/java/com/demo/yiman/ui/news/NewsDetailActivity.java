@@ -2,9 +2,11 @@ package com.demo.yiman.ui.news;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.demo.yiman.R;
@@ -20,6 +23,7 @@ import com.demo.yiman.base.BaseActivity;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 
 import butterknife.BindView;
+import q.rorbin.badgeview.QBadgeView;
 
 public class NewsDetailActivity extends BaseActivity {
     @BindView(R.id.news_toolbar)
@@ -28,6 +32,10 @@ public class NewsDetailActivity extends BaseActivity {
     ProgressBar mProgressBar;
     @BindView(R.id.news_webView)
     WebView mWebView;
+    @BindView(R.id.iv_sum_comment)
+    ImageView mSumComment;
+
+
     private static final String Url="url";
     private static final String Source="source";
     @Override
@@ -53,7 +61,7 @@ public class NewsDetailActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -64,7 +72,6 @@ public class NewsDetailActivity extends BaseActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
-
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 return super.shouldOverrideUrlLoading(view, request);
@@ -114,8 +121,8 @@ public class NewsDetailActivity extends BaseActivity {
                 mToolbar.setTitle(source);
             }
         }
+        new QBadgeView(NewsDetailActivity.this).bindTarget(mSumComment).setBadgeGravity(Gravity.END|Gravity.TOP).setBadgeNumber(12).setBadgeBackgroundColor(Color.WHITE).setBadgeTextColor(Color.BLACK).setBadgeTextSize(10,true).setShowShadow(false).setGravityOffset(0,-8,true);
     }
-
 
     /**
      * WebView 通用设置

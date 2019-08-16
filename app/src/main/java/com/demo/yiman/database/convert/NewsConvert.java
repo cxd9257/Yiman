@@ -1,5 +1,6 @@
 package com.demo.yiman.database.convert;
 
+import com.demo.yiman.bean.NewsDataBean;
 import com.demo.yiman.bean.NewsDetailModle;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -10,17 +11,23 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsConvert implements PropertyConverter<List<NewsDetailModle.ResultBean.DataBean>,String> {
+public class NewsConvert implements PropertyConverter<List<NewsDataBean>,String> {
 
     @Override
-    public List<NewsDetailModle.ResultBean.DataBean> convertToEntityProperty(String databaseValue) {
-        Type type = new TypeToken<ArrayList<NewsDetailModle.ResultBean.DataBean>>() {
+    public List<NewsDataBean> convertToEntityProperty(String databaseValue) {
+        if (databaseValue == null) {
+            return null;
+        }
+        Type type = new TypeToken<ArrayList<NewsDataBean>>() {
         }.getType();
         return new Gson().fromJson(databaseValue,type);
     }
 
     @Override
-    public String convertToDatabaseValue(List<NewsDetailModle.ResultBean.DataBean> entityProperty) {
+    public String convertToDatabaseValue(List<NewsDataBean> entityProperty) {
+        if (entityProperty == null || entityProperty.size()==0) {
+            return null;
+        }
         return new Gson().toJson(entityProperty);
     }
 }

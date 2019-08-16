@@ -14,8 +14,11 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.demo.yiman.R;
 import com.demo.yiman.base.BaseFragment;
 import com.demo.yiman.base.baseMVP.BaseView;
+import com.demo.yiman.bean.NewsDataBean;
 import com.demo.yiman.bean.NewsDetailModle;
+import com.demo.yiman.database.YimanDbController;
 import com.demo.yiman.ui.adapter.NewsDetailAdapter;
+import com.demo.yiman.utils.NetworkUtil;
 import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
 
@@ -28,6 +31,10 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
+/**
+ * 聚合新闻API接口，因API没有提供分页功能
+ * 故没做加载更多操作
+ */
 public class DetailFragment extends BaseFragment<DetailPresenter> implements DetailView {
     @BindView(R.id.ptrClaFrameLayout)
     PtrClassicFrameLayout mPtrClassicFrameLayout;
@@ -38,7 +45,7 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
 
     private String newsId;
     private int position;
-    private List<NewsDetailModle.ResultBean.DataBean> beanList;
+    private List<NewsDataBean> beanList;
     private NewsDetailAdapter detailAdapter;
     private boolean isRemoveHeaderView = false;
     public static DetailFragment newInstance(String newsid,int position){
@@ -49,7 +56,6 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public int getLayoutId() {
@@ -82,20 +88,18 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(detailAdapter = new NewsDetailAdapter(R.layout.item_detail_doc_slideimg,beanList));
         detailAdapter.setEnableLoadMore(true);
-        //detailAdapter.setLoadMoreView(new CustomLoadMoreView());
         detailAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
-        //detailAdapter.setOnLoadMoreListener(mPresenter.getNews(newsId););
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                NewsDetailModle.ResultBean.DataBean itemBean = (NewsDetailModle.ResultBean.DataBean) adapter.getItem(position);
+                NewsDataBean itemBean = (NewsDataBean) adapter.getItem(position);
                 goRead(itemBean.getUrl(),itemBean.getCategory());
             }
         });
         mRecyclerView.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                NewsDetailModle.ResultBean.DataBean itemBean = (NewsDetailModle.ResultBean.DataBean) adapter.getItem(position);
+                NewsDataBean itemBean = (NewsDataBean) adapter.getItem(position);
                 switch (view.getId()){
                     case R.id.iv_news_close:
                         showToast("关闭");
@@ -132,7 +136,6 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
             return;
         }
         NewsDetailActivity.launch(mContext,url,source);
-
     }
     @Override
     public void initData() {
@@ -140,9 +143,13 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
         if (getArguments() == null) return;
         newsId = getArguments().getString("newsId");
         position = getArguments().getInt("position");
-        mPresenter.getNews(newsId);
-    }
 
+        if (!NetworkUtil.isNetworkAvailable(mContext)){
+            lodingData();
+        }else{
+            mPresenter.getNews(newsId);
+        }
+    }
 
     @Override
     public void onNewsSucc(NewsDetailModle newsDetailModle) {
@@ -155,28 +162,27 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
                     detailAdapter.removeAllHeaderView();
                 }
                 detailAdapter.setNewData(newsDetailModle.getResult().getData());
-
                 mPtrClassicFrameLayout.refreshComplete();
                 showNewsTips(newsDetailModle.getResult().getData().size(),true);
             }
+            handleDataBase(newsDetailModle.getResult().getData()); //存储数据
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
-
-    @Override
-    public void loadData(List<NewsDetailModle.ResultBean.DataBean> newsDetailModle) {
-//        if (newsDetailModle == null || newsDetailModle.size() == 0){
-//            //showFaild();
-//            Log.e("xxx","111");
-//        }else {
-//            if (isRemoveHeaderView){
-//                detailAdapter.removeAllHeaderView();
-//            }
-//            detailAdapter.setNewData(newsDetailModle);
-//            Log.e("xxx","112");
-//        }
+    private void lodingData(){  //读取本地
+        beanList = YimanDbController.getInstance().queryAll();
+        if (beanList == null) return;
+        detailAdapter.setNewData(beanList);
+    }
+    private void handleDataBase(List<NewsDataBean> list){
+        List<NewsDataBean> newList = new ArrayList<>();
+        for (int i=0; i<list.size(); i++){
+            NewsDataBean info = list.get(i);
+            newList.add(info);
+        }
+        YimanDbController.getInstance().delete(newList);
+        YimanDbController.getInstance().insertOrReplace(newList);
     }
 
 }

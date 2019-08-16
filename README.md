@@ -19,9 +19,9 @@ yiman是一款使用 MVP + Retrofit2 + Rxjava + EventBus 等框架开发的阅�
 
 ## 截图
 
-<img src="screenshots/0.gif" width="240" hspace="20" />
+<img src="screenshots/0.gif" width="280" hspace="20" />
 
-<img src="screenshots/1.gif" width="240"  hspace="20">
+<img src="screenshots/1.gif" width="280"  hspace="20">
 
 
 

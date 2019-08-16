@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface DetailView extends BaseView {
     void onNewsSucc(NewsDetailModle newsDetailModle);
-    void loadData(List<NewsDetailModle.ResultBean.DataBean> newsDetailModle);
 }

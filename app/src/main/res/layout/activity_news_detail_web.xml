@@ -40,43 +40,54 @@
         android:id="@+id/ll_comment"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@android:color/white"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_face"
             android:drawableLeft="@drawable/ic_edit"
             android:drawablePadding="5dp"
             android:text="@string/comment_hint"
             android:padding="4dp"
+            android:layout_weight="0.4"
             android:textColor="@color/bg_back"
             android:textSize="12sp"
             android:gravity="center"
             android:background="@drawable/comment_bg"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_comment1"
-            android:layout_weight="1.5"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_like"
-            android:layout_weight="1.5"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_assist"
-            android:layout_weight="1.5"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_share1"
-            android:layout_weight="1.5"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/iv_sum_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_comment1"
+                android:layout_weight="1.5"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_like"
+                android:layout_weight="1.5"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_assist"
+                android:layout_weight="1.5"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_share1"
+                android:layout_weight="1.5"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 

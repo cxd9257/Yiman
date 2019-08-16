@@ -21,14 +21,18 @@
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
     <TextView
         android:id="@+id/tv_news_tips"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:background="@color/colorPrimary"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/news_tips_bg"
         android:text="@string/news_tips"
         android:gravity="center"
         android:textColor="@color/circleColor"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="12sp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

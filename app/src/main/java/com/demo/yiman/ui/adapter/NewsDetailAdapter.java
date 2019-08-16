@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.demo.yiman.R;
+import com.demo.yiman.bean.NewsDataBean;
 import com.demo.yiman.bean.NewsDetailModle;
 import com.demo.yiman.utils.ImageLoaderUtil;
 import com.demo.yiman.widget.CustomRoundAngleImageView;
@@ -18,15 +19,15 @@ import java.util.List;
 
 import static android.support.constraint.ConstraintSet.GONE;
 
-public class NewsDetailAdapter extends BaseQuickAdapter<NewsDetailModle.ResultBean.DataBean,BaseViewHolder>{
+public class NewsDetailAdapter extends BaseQuickAdapter<NewsDataBean,BaseViewHolder>{
 
 
-    public NewsDetailAdapter(int layoutResId, @Nullable List<NewsDetailModle.ResultBean.DataBean> data) {
+    public NewsDetailAdapter(int layoutResId, @Nullable List<NewsDataBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, NewsDetailModle.ResultBean.DataBean bean) {
+    protected void convert(BaseViewHolder helper, NewsDataBean bean) {
                 helper.setText(R.id.tv_news_title,bean.getTitle());
                 helper.setText(R.id.tv_news_source,bean.getAuthor_name());
                 helper.setText(R.id.tv_news_date,bean.getDate());
