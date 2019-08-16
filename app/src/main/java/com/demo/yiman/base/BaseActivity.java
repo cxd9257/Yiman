@@ -2,19 +2,14 @@ package com.demo.yiman.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
@@ -23,7 +18,7 @@ import com.demo.yiman.R;
 import com.demo.yiman.base.baseMVP.BaseModel;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.base.baseMVP.BaseView;
-import com.jaeger.library.StatusBarUtil;
+import com.demo.yiman.utils.StatusBarUtil;
 
 
 public abstract class BaseActivity<P extends BasePresenter> extends SupportActivity implements BaseView ,BGASwipeBackHelper.Delegate{
@@ -53,7 +48,15 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
     protected void setStatusBar() {
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
     }
-
+    /**
+     * 设置状态栏颜色
+     *
+     * @param color
+     * @param statusBarAlpha 透明度
+     */
+    public void setStatusBarColor(@ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
+        StatusBarUtil.setColorForSwipeBack(this, color, statusBarAlpha);
+    }
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = getLayoutInflater().inflate(getLayoutId(), container);
         unbinder = ButterKnife.bind(this, view);
@@ -92,6 +95,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         // 设置触发释放后自动滑动返回的阈值，默认值为 0.3f
         mSwipeBackHelper.setSwipeBackThreshold(0.3f);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

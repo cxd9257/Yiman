@@ -2,9 +2,13 @@ package com.demo.yiman.ui.news;
 
 import com.demo.yiman.MyApp;
 import com.demo.yiman.R;
+import com.demo.yiman.base.baseMVP.BaseObserver;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.bean.Channel;
+import com.demo.yiman.bean.NewsDetailModle;
+import com.demo.yiman.bean.NewsWeather;
 import com.demo.yiman.database.ChannelDao;
+import com.demo.yiman.net.ApiConfig;
 
 import org.litepal.crud.DataSupport;
 import org.litepal.crud.callback.SaveCallback;
@@ -66,6 +70,23 @@ public class NewsChannelPresenter extends BasePresenter<NewsView> implements New
             myChannels.addAll(channelList);
         }
         baseView.loadData(myChannels,otherChannels);
+    }
+    public void getNewsWeather(String city){
+        addDisposable(apiServer.weatherByRx(city, ApiConfig.JuHeWeatherKey), new BaseObserver<NewsWeather>(baseView) {
+
+            @Override
+            protected void onSuccess(NewsWeather  newsWeatherModle) {
+                baseView.loaWeatherdData(newsWeatherModle);
+                baseView.hideLoading();
+            }
+
+            @Override
+            public void onError(String msg) {
+                baseView.showError(msg);
+                baseView.hideLoading();
+            }
+        });
+
     }
 
 }

@@ -15,11 +15,13 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.demo.yiman.R;
 import com.demo.yiman.base.BaseFragment;
 import com.demo.yiman.bean.Channel;
 import com.demo.yiman.bean.NewTopBean;
+import com.demo.yiman.bean.NewsWeather;
 import com.demo.yiman.database.ChannelDao;
 import com.demo.yiman.event.NewChannelEvent;
 import com.demo.yiman.event.SelectChannelEvent;
@@ -59,6 +61,13 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     ImageButton mImageAdd;
     @BindView(R.id.ib_add_title)
     ImageButton mImageAddTitle;
+
+    @BindView(R.id.tv_temperature)
+    TextView mTemperature;
+    @BindView(R.id.tv_city)
+    TextView mCity;
+    @BindView(R.id.tv_info)
+    TextView mInfo;
     int toolBarPositionY=0;
     private List<Channel> mSelectedData;
     private List<Channel> mUnSelectedData;
@@ -152,6 +161,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         mSelectedData = new ArrayList<>();
         mUnSelectedData = new ArrayList<>();
         mPresenter.getChannel();
+        mPresenter.getNewsWeather("广州");
     }
 
     @Override
@@ -237,6 +247,15 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     @Override
     public void getChannel() {
 
+    }
+
+    @Override
+    public void loaWeatherdData(NewsWeather newsWeatherModle) {
+        if (newsWeatherModle !=null){
+            mTemperature.setText(newsWeatherModle.getResult().getRealtime().getTemperature()+"°");
+            mCity.setText(newsWeatherModle.getResult().getCity());
+            mInfo.setText(newsWeatherModle.getResult().getRealtime().getInfo());
+        }
     }
 
     private void dealWithViewPager() {

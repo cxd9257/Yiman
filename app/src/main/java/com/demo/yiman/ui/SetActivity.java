@@ -1,5 +1,6 @@
 package com.demo.yiman.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -127,7 +128,7 @@ public class SetActivity extends BaseActivity {
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         super.bindView(view, savedInstanceState);
-
+        setStatusBarColor(Color.parseColor("#008577"), 0);
     }
 
     @Override

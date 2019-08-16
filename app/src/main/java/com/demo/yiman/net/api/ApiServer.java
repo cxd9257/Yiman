@@ -3,6 +3,7 @@ package com.demo.yiman.net.api;
 import com.demo.yiman.bean.ImageModle;
 import com.demo.yiman.bean.JokeModle;
 import com.demo.yiman.bean.NewsDetailModle;
+import com.demo.yiman.bean.NewsWeather;
 import com.demo.yiman.book.BookModle;
 
 import io.reactivex.Observable;
@@ -27,7 +28,11 @@ public interface ApiServer {
     @POST("/toutiao/index")
     Observable<NewsDetailModle> newsByRx(@Query("type") String id, @Query("key") String key);
 
-
+    /**
+     * 获取天气
+     */
+    @POST("http://apis.juhe.cn/simpleWeather/query")
+    Observable<NewsWeather> weatherByRx(@Query("city") String city, @Query("key") String key);
     /**
      * 随机获取段子
      */

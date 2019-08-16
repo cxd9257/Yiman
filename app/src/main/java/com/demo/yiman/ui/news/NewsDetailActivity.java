@@ -58,6 +58,7 @@ public class NewsDetailActivity extends BaseActivity {
     public void bindView(View view, Bundle savedInstanceState) {
         super.bindView(view, savedInstanceState);
         setWebView(mWebView);
+        setStatusBarColor(Color.parseColor("#008577"), 0);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
