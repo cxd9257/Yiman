@@ -36,17 +36,20 @@
         <activity
             android:name=".ui.news.NewsDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent">
         </activity>
         <activity
             android:name=".ui.SetActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent">
         </activity>
         <activity
             android:name=".ui.WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent">
         </activity>
         <activity
             android:name=".ui.joke.ImageBrowseActivity"
