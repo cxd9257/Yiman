@@ -53,8 +53,6 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     com.flyco.tablayout.SlidingTabLayout mSlidingTabLayoutTitle;
     @BindView(R.id.nes_scroll_view)
     CustomNestedScrollView mScrollView;
-    @BindView(R.id.ll_search_title)
-    RelativeLayout mRelativeLayoutSearch;
     @BindView(R.id.gv_top_content)
     GridView mGridViewNewTop;
     @BindView(R.id.ib_add)
@@ -76,7 +74,6 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     private NewTopDataAdapter mNewTopDataAdapter;
     private int selectedIndex;
     private String selectedChannel;
-    private boolean isFirstLoading;
     public static NewsFragment newInstance(){
         Bundle args = new Bundle();
         NewsFragment fragment = new NewsFragment();
@@ -181,7 +178,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
             mSelectedData.addAll(channels);
             mUnSelectedData.clear();
             mUnSelectedData.addAll(otherChannels);
-            mChannelPagerAdapter = new ChannelPagerAdapter(getChildFragmentManager(),channels);
+            mChannelPagerAdapter = new ChannelPagerAdapter(getFragmentManager(),channels);
             mViewPager.setAdapter(mChannelPagerAdapter);
             mViewPager.setOffscreenPageLimit(2);
             mViewPager.setCurrentItem(0,false);
@@ -192,7 +189,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         }
 
     }
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)  //EventBus事件
+    @Subscribe(threadMode = ThreadMode.MAIN)  //EventBus事件
     public void updateChannel(NewChannelEvent event){
         if (event==null)return;
         if (event.selectedDatas !=null && event.unSelectedDatas != null){
@@ -218,10 +215,11 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
             }
         }
     }
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectChannelEvent(SelectChannelEvent selectChannelEvent) {
         if (selectChannelEvent == null) return;
         List<String> integers = new ArrayList<>();
+
         for (Channel channel : mSelectedData) {
             integers.add(channel.getChannelName());
         }
@@ -253,7 +251,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     public void loaWeatherdData(NewsWeather newsWeatherModle) {
         if (newsWeatherModle !=null){
             mTemperature.setText(newsWeatherModle.getResult().getRealtime().getTemperature()+"°");
-            mCity.setText(newsWeatherModle.getResult().getCity());
+            mCity.setText(newsWeatherModle.getResult().getCity()+" "+newsWeatherModle.getResult().getRealtime().getDirect());
             mInfo.setText(newsWeatherModle.getResult().getRealtime().getInfo());
         }
     }
@@ -263,7 +261,6 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         ViewGroup.LayoutParams params = mViewPager.getLayoutParams();
         params.height = ScreenUtil.getScreenHeightPx(mContext)-toolBarPositionY-mSlidingTabLayout.getHeight()-ToolUtil.getStateBarHeight(getActivity())+1;
         mViewPager.setLayoutParams(params);
-        Log.e("ViewPager高",params.height+"");
     }
     /**
      * 获取头部目录，图片地址是自己搭建的

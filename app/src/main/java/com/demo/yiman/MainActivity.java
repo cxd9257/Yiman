@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity {
             mFragment[4] = findFragment(AboutFragment.class);
         }
         setFragmentPosition(0);
-        com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
+        //com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -71,7 +71,7 @@ public class MainActivity extends BaseActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_new:
                     setFragmentPosition(0);
-                    com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
+                    //com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
                     break;
                 case R.id.navigation_video:
                     setFragmentPosition(1);

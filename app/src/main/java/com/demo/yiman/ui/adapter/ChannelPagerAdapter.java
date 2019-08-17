@@ -1,11 +1,8 @@
 package com.demo.yiman.ui.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
+
 
 import com.demo.yiman.base.BaseFragment;
 import com.demo.yiman.bean.Channel;
@@ -28,7 +25,6 @@ public class ChannelPagerAdapter extends FragmentStatePagerAdapter {
         return DetailFragment.newInstance(mChannels.get(i).getChannelId(),i);
     }
 
-    @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         return mChannels.get(position).getChannelName();
@@ -40,7 +36,7 @@ public class ChannelPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public int getItemPosition(@NonNull Object object) {
+    public int getItemPosition(Object object) {
         return POSITION_NONE;
     }
 }

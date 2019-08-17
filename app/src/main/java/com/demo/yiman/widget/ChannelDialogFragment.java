@@ -41,7 +41,7 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelLi
     private NewsChannelAdapter mAdapter;
     List<Channel> mSelectedDatas;
     List<Channel> mUnSelectedDatas;
-    private OnChannelListener onChannelListener;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,11 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelLi
         });
         processLoic();
     }
+    private OnChannelListener onChannelListener;
 
+    public void setOnChannelListener(OnChannelListener onChannelListener) {
+        this.onChannelListener = onChannelListener;
+    }
 
 
     public static ChannelDialogFragment newInstance(List<Channel> selectedDatas,List<Channel> unSelectedDatas){
