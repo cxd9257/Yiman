@@ -1,8 +1,16 @@
 package com.demo.yiman.ui.news;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +47,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -50,7 +59,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     @BindView(R.id.SlidingTabLayout)
     com.flyco.tablayout.SlidingTabLayout mSlidingTabLayout;
     @BindView(R.id.SlidingTabLayoutTitle)//用于划动隐藏显示指示器
-    com.flyco.tablayout.SlidingTabLayout mSlidingTabLayoutTitle;
+            com.flyco.tablayout.SlidingTabLayout mSlidingTabLayoutTitle;
     @BindView(R.id.nes_scroll_view)
     CustomNestedScrollView mScrollView;
     @BindView(R.id.gv_top_content)
@@ -66,7 +75,9 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     TextView mCity;
     @BindView(R.id.tv_info)
     TextView mInfo;
-    int toolBarPositionY=0;
+    @BindView(R.id.appBar)
+    AppBarLayout mAppBar;
+    int toolBarPositionY = 0;
     private List<Channel> mSelectedData;
     private List<Channel> mUnSelectedData;
     private List<NewTopBean> mNewTopData;
@@ -74,12 +85,14 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     private NewTopDataAdapter mNewTopDataAdapter;
     private int selectedIndex;
     private String selectedChannel;
-    public static NewsFragment newInstance(){
+
+    public static NewsFragment newInstance() {
         Bundle args = new Bundle();
         NewsFragment fragment = new NewsFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     public int getLayoutId() {
         return R.layout.fragment_news;
     }
@@ -87,29 +100,32 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     @Override
     public void onStart() {
         super.onStart();
-        if(!EventBus.getDefault().isRegistered(this)){
+        if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
+
     }
 
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         super.bindView(view, savedInstanceState);
         initToolbar(); //暂时没有对Toolbar进行封装
+        registerReceiver();
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            int lastScrollY=0;
-            int h = ToolUtil.dip2px(200,mContext);
-            int color = ContextCompat.getColor(mContext,R.color.colorPrimary) & 0x00ffffff;
+            int lastScrollY = 0;
+            int h = ToolUtil.dip2px(200, mContext);
+            int color = ContextCompat.getColor(mContext, R.color.colorPrimary) & 0x00ffffff;
+
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 int[] location = new int[2];
                 mSlidingTabLayout.getLocationOnScreen(location);
                 int yPositioin = location[1];
-                if (yPositioin< toolBarPositionY){
+                if (yPositioin < toolBarPositionY) {
                     mSlidingTabLayoutTitle.setVisibility(View.VISIBLE);
                     mImageAddTitle.setVisibility(View.VISIBLE);
                     mScrollView.setNeedScroll(false);
-                }else {
+                } else {
                     mSlidingTabLayoutTitle.setVisibility(View.GONE);
                     mImageAddTitle.setVisibility(View.GONE);
                     mScrollView.setNeedScroll(true);
@@ -122,6 +138,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
             @Override
             public void onPageScrolled(int i, float v, int i1) {
             }
+
             @Override
             public void onPageSelected(int i) {
                 selectedIndex = i;
@@ -153,7 +170,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     public void initData() {
         super.initData();
         initTopData();
-        mNewTopDataAdapter = new NewTopDataAdapter(mContext,mNewTopData);
+        mNewTopDataAdapter = new NewTopDataAdapter(mContext, mNewTopData);
         mGridViewNewTop.setAdapter(mNewTopDataAdapter);
         mSelectedData = new ArrayList<>();
         mUnSelectedData = new ArrayList<>();
@@ -172,31 +189,69 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        initToolbar();
+
+
+    }
+    public void Updata(){
+        Log.e("hi","a");
+        mAppBar.setExpanded(true);
+    }
+    private  LocalBroadcastManager broadcastManager;
+    //注册广播接收器
+    private void registerReceiver() {
+        broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("updata");
+        broadcastManager.registerReceiver(mRefreshReceiver, intentFilter);
+    }
+
+    private BroadcastReceiver mRefreshReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String refresh= intent.getStringExtra("refresh");
+            Log.e("来了吖","妖怪吧");
+            if ("yes".equals(refresh)) {
+                new Handler().post(new Runnable() {
+                    public void run() {
+                        //重新初始化、拉取数据
+                        mPresenter.getChannel();
+                    }
+                });
+            }
+        }
+    };
+
+    @Override
     public void loadData(List<Channel> channels, List<Channel> otherChannels) {
-        if (channels != null){
+        if (channels != null) {
             mSelectedData.clear();
             mSelectedData.addAll(channels);
             mUnSelectedData.clear();
             mUnSelectedData.addAll(otherChannels);
-            mChannelPagerAdapter = new ChannelPagerAdapter(getFragmentManager(),channels);
+            mChannelPagerAdapter = new ChannelPagerAdapter(getFragmentManager(), channels);
             mViewPager.setAdapter(mChannelPagerAdapter);
             mViewPager.setOffscreenPageLimit(2);
-            mViewPager.setCurrentItem(0,false);
+            mViewPager.setCurrentItem(0, false);
             mSlidingTabLayout.setViewPager(mViewPager);
             mSlidingTabLayoutTitle.setViewPager(mViewPager);
-        }else{
+        } else {
             ShowToast("数据异常");
         }
 
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)  //EventBus事件
-    public void updateChannel(NewChannelEvent event){
-        if (event==null)return;
-        if (event.selectedDatas !=null && event.unSelectedDatas != null){
+    public void updateChannel(NewChannelEvent event) {
+        if (event == null) return;
+        if (event.selectedDatas != null && event.unSelectedDatas != null) {
             mSelectedData = event.selectedDatas;
             mUnSelectedData = event.unSelectedDatas;
             mChannelPagerAdapter.updataChannel(mSelectedData);
             mSlidingTabLayout.notifyDataSetChanged();
+            mSlidingTabLayoutTitle.notifyDataSetChanged();
             ChannelDao.saveChannels(event.allChannels);  //拿到新数据后让指示器改变，并保存新数据
 
             List<String> integers = new ArrayList<>();
@@ -215,6 +270,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
             }
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void selectChannelEvent(SelectChannelEvent selectChannelEvent) {
         if (selectChannelEvent == null) return;
@@ -225,10 +281,11 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         }
         setViewpagerPosition(integers, selectChannelEvent.channelName);
     }
-    private void setViewpagerPosition(List<String> integers,String channelName){
-        if (TextUtils.isEmpty(channelName)||integers == null)return;
-        for (int j=0; j<integers.size(); j++){
-            if (integers.get(j).equals(channelName)){
+
+    private void setViewpagerPosition(List<String> integers, String channelName) {
+        if (TextUtils.isEmpty(channelName) || integers == null) return;
+        for (int j = 0; j < integers.size(); j++) {
+            if (integers.get(j).equals(channelName)) {
                 selectedChannel = integers.get(j);
                 selectedIndex = j;
                 break;
@@ -237,9 +294,9 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         mViewPager.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mViewPager.setCurrentItem(selectedIndex,false);
+                mViewPager.setCurrentItem(selectedIndex, false);
             }
-        },100);
+        }, 100);
     }
 
     @Override
@@ -249,39 +306,40 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
 
     @Override
     public void loaWeatherdData(NewsWeather newsWeatherModle) {
-        if (newsWeatherModle !=null){
-            mTemperature.setText(newsWeatherModle.getResult().getRealtime().getTemperature()+"°");
-            mCity.setText(newsWeatherModle.getResult().getCity()+" "+newsWeatherModle.getResult().getRealtime().getDirect());
+        if (newsWeatherModle != null) {
+            mTemperature.setText(newsWeatherModle.getResult().getRealtime().getTemperature() + "°");
+            mCity.setText(newsWeatherModle.getResult().getCity() + " " + newsWeatherModle.getResult().getRealtime().getDirect());
             mInfo.setText(newsWeatherModle.getResult().getRealtime().getInfo());
         }
     }
 
     private void dealWithViewPager() {
-        toolBarPositionY = mToolbar.getHeight()+ ToolUtil.getStateBarHeight(getActivity());
+        toolBarPositionY = mToolbar.getHeight() + ToolUtil.getStateBarHeight(getActivity());
         ViewGroup.LayoutParams params = mViewPager.getLayoutParams();
-        params.height = ScreenUtil.getScreenHeightPx(mContext)-toolBarPositionY-mSlidingTabLayout.getHeight()-ToolUtil.getStateBarHeight(getActivity())+1;
+        params.height = ScreenUtil.getScreenHeightPx(mContext) - toolBarPositionY - mSlidingTabLayout.getHeight() - ToolUtil.getStateBarHeight(getActivity()) + 1;
         mViewPager.setLayoutParams(params);
     }
+
     /**
      * 获取头部目录，图片地址是自己搭建的
      */
-    private void initTopData(){
+    private void initTopData() {
         mNewTopData = new ArrayList<>();
-        String[] nameList = new String[]{"直播","小说","漫画","想听FM","游戏","百度",
-                            "体育","彩票","交友","提问","天气","更多"};
+        String[] nameList = new String[]{"直播", "小说", "漫画", "想听FM", "游戏", "百度",
+                "体育", "彩票", "交友", "提问", "天气", "更多"};
         String[] imageList = new String[]{"http://120.78.221.95/Resource/wx/ic_news_live.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_fiction.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_cartoon.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_fm.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_game.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_baidu.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_sports.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_lottery.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_jy.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_question.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_weather.png",
-                                          "http://120.78.221.95/Resource/wx/ic_news_util.png"};
-        for (int i= 0;i<nameList.length;i++){
+                "http://120.78.221.95/Resource/wx/ic_news_fiction.png",
+                "http://120.78.221.95/Resource/wx/ic_news_cartoon.png",
+                "http://120.78.221.95/Resource/wx/ic_news_fm.png",
+                "http://120.78.221.95/Resource/wx/ic_news_game.png",
+                "http://120.78.221.95/Resource/wx/ic_news_baidu.png",
+                "http://120.78.221.95/Resource/wx/ic_news_sports.png",
+                "http://120.78.221.95/Resource/wx/ic_news_lottery.png",
+                "http://120.78.221.95/Resource/wx/ic_news_jy.png",
+                "http://120.78.221.95/Resource/wx/ic_news_question.png",
+                "http://120.78.221.95/Resource/wx/ic_news_weather.png",
+                "http://120.78.221.95/Resource/wx/ic_news_util.png"};
+        for (int i = 0; i < nameList.length; i++) {
             NewTopBean newTopBean = new NewTopBean();
             newTopBean.setTitle(nameList[i]);
             newTopBean.setImageUrl(imageList[i]);
@@ -289,9 +347,9 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         }
     }
 
-    @OnClick({R.id.ib_add,R.id.ib_add_title})
-    public void onViewClicked(View view){
-        switch (view.getId()){
+    @OnClick({R.id.ib_add, R.id.ib_add_title})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
             case R.id.ib_add:
                 startChannelDialog();
                 break;
@@ -300,14 +358,16 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
                 break;
         }
     }
-    private void startChannelDialog(){
-        ChannelDialogFragment channelDialogFragment =  ChannelDialogFragment.newInstance(mSelectedData,mUnSelectedData);
-        channelDialogFragment.show(getChildFragmentManager(),"CHANNEL");
+
+    private void startChannelDialog() {
+        ChannelDialogFragment channelDialogFragment = ChannelDialogFragment.newInstance(mSelectedData, mUnSelectedData);
+        channelDialogFragment.show(getChildFragmentManager(), "CHANNEL");
     }
 
     @Override
     public void onDestroyView() {
         EventBus.getDefault().unregister(this);
+        broadcastManager.unregisterReceiver(mRefreshReceiver);
         super.onDestroyView();
     }
 }

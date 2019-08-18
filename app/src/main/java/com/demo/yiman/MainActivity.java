@@ -1,11 +1,17 @@
 package com.demo.yiman;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +34,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 public class MainActivity extends BaseActivity {
     private int lastIndex;
+    private int endIndex;
     private SupportFragment[] mFragment = new SupportFragment[5];
     @BindView(R.id.nav_view)
     BottomNavigationView navView;
@@ -60,7 +67,8 @@ public class MainActivity extends BaseActivity {
             mFragment[4] = findFragment(AboutFragment.class);
         }
         setFragmentPosition(0);
-        //com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
+        endIndex = 0;
+        com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -71,22 +79,32 @@ public class MainActivity extends BaseActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_new:
                     setFragmentPosition(0);
-                    //com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
+                    com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
+                    if (endIndex == 0){
+                        Intent intent = new Intent("updata");
+                        intent.putExtra("refresh","yes");
+                        LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+                    }
+                    endIndex =0;
                     break;
                 case R.id.navigation_video:
                     setFragmentPosition(1);
+                    endIndex =1;
                     com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
                     break;
                 case R.id.navigation_jc:
                     setFragmentPosition(2);
+                    endIndex =2;
                     com.jaeger.library.StatusBarUtil.setLightMode(MainActivity.this);
                     break;
                 case R.id.navigation_joke:
                     setFragmentPosition(3);
+                    endIndex =3;
                     com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
                     break;
                 case R.id.navigation_me:
                     setFragmentPosition(4);
+                    endIndex =4;
                     com.jaeger.library.StatusBarUtil.setLightMode(MainActivity.this);
                     break;
             }

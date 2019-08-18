@@ -54,6 +54,35 @@
         <item>shishang</item>
     </string-array>
 
+    <string-array name="news_top_name">
+        <item>直播</item>
+        <item>小说</item>
+        <item>漫画</item>
+        <item>想听FM</item>
+        <item>游戏</item>
+        <item>百度</item>
+        <item>体育</item>
+        <item>彩票</item>
+        <item>交友</item>
+        <item>提问</item>
+        <item>天气</item>
+        <item>更多</item>
+    </string-array>
+    <string-array name="news_top_url">
+        <item>http://120.78.221.95/Resource/wx/ic_news_live.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_fiction.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_cartoon.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_fm.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_game.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_baidu.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_sports.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_lottery.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_jy.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_question.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_weather.png</item>
+        <item>http://120.78.221.95/Resource/wx/ic_news_util.png</item>
+    </string-array>
+
 
     <string name="news_tips">已为您推荐了%1$s条新资讯</string>
 </resources>

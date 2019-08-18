@@ -26,7 +26,6 @@ public class NewTopDataAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        Log.e("有多少",mList.size()+"");
         return mList!=null?mList.size():0;
     }
 
