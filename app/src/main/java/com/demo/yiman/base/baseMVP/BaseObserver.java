@@ -40,11 +40,17 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     @Override
     protected void onStart() {
         super.onStart();
-        if (view !=null){
-            view.showLoading();
-        }
+//        if (view !=null){
+//            view.showLoading();
+//        }
     }
 
+    /**
+     * 理论onNext方法应该做服务器返回判断
+     * 因调用了不同API
+     * 返回字段不统一，故直接传入完整返回
+     * @param t
+     */
     @Override
     public void onNext(T t) {
 //        BaseModel model = (BaseModel)t;
@@ -65,9 +71,9 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onError(Throwable e) {
-        if (view != null && isShowDialog) {
-            view.hideLoading();
-        }
+//        if (view != null && isShowDialog) {
+//            view.hideLoading();
+//        }
         BaseException be = null;
 //        ResponseBody responseBody = ((HttpException) e).response().errorBody();
 //        try{

@@ -1,5 +1,6 @@
 package com.demo.yiman.ui.news;
 
+import com.demo.yiman.base.baseMVP.BaseModel;
 import com.demo.yiman.base.baseMVP.BaseObserver;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.bean.NewsDetailModle;
@@ -17,13 +18,11 @@ public class DetailPresenter extends BasePresenter<DetailView> {
             @Override
             protected void onSuccess(NewsDetailModle  newsDetailModle) {
                 baseView.onNewsSucc(newsDetailModle);
-                baseView.hideLoading();
             }
 
             @Override
             public void onError(String msg) {
                 baseView.showError(msg);
-                baseView.hideLoading();
             }
         });
 

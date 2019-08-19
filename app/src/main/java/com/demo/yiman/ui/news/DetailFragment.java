@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.demo.yiman.R;
 import com.demo.yiman.base.BaseFragment;
+import com.demo.yiman.base.baseMVP.BaseModel;
 import com.demo.yiman.base.baseMVP.BaseView;
 import com.demo.yiman.bean.NewsDataBean;
 import com.demo.yiman.bean.NewsDetailModle;
@@ -170,6 +171,14 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
             e.printStackTrace();
         }
     }
+
+
+    @Override
+    public void showError(String msg) {
+        super.showError(msg);
+        mPtrClassicFrameLayout.refreshComplete();
+    }
+
     private void lodingData(){  //读取本地
         beanList = YimanDbController.getInstance().queryAll();
         if (beanList == null) return;

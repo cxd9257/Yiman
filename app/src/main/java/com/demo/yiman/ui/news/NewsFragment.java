@@ -192,13 +192,8 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     public void onResume() {
         super.onResume();
         initToolbar();
-
-
     }
-    public void Updata(){
-        Log.e("hi","a");
-        mAppBar.setExpanded(true);
-    }
+
     private  LocalBroadcastManager broadcastManager;
     //注册广播接收器
     private void registerReceiver() {
