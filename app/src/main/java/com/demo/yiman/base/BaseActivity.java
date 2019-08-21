@@ -1,7 +1,10 @@
 package com.demo.yiman.base;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -22,6 +25,9 @@ import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.base.baseMVP.BaseView;
 import com.demo.yiman.utils.StatusBarUtil;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 
 public abstract class BaseActivity<P extends BasePresenter> extends SupportActivity implements BaseView ,BGASwipeBackHelper.Delegate{
     public Context mContext;
@@ -31,7 +37,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
     Unbinder unbinder;
     protected abstract P createPresenter();
     private  static Toast mToast;
-    private final String TAG  ="BaseActivity";
     protected BGASwipeBackHelper mSwipeBackHelper;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -158,4 +163,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
     public void onSwipeBackLayoutExecuted() {
         mSwipeBackHelper.swipeBackward();
     }
+
+
+
 }
