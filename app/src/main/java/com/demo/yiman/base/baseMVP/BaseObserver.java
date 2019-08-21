@@ -69,6 +69,11 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     protected abstract void onSuccess(T t);
 
+    /**
+     * 做的错误判断
+     * 在正式商业跟需求改动
+     * @param e
+     */
     @Override
     public void onError(Throwable e) {
 //        if (view != null && isShowDialog) {

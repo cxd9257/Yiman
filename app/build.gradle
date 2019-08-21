@@ -19,7 +19,7 @@ android {
         versionCode 1
         versionName "1.0"
         ndk{
-            abiFilters 'armeabi'
+            abiFilters 'x86','armeabi'
         }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

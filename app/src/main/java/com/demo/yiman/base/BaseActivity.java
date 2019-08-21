@@ -2,10 +2,12 @@ package com.demo.yiman.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
     Unbinder unbinder;
     protected abstract P createPresenter();
     private  static Toast mToast;
-
+    private final String TAG  ="BaseActivity";
     protected BGASwipeBackHelper mSwipeBackHelper;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
