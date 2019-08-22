@@ -46,6 +46,11 @@
 
     </style>
 
+    <style name="diaog_animations">
+        <item name="android:windowExitAnimation">@anim/dialog_miss_anim</item>
+        
+    </style>
+    
     <style name="text_Title">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">17sp</item>

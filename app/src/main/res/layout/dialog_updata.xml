@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:padding="20dp"
+    android:layout_height="match_parent">
+
+    <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_updata"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="3.08版本"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/tv_context"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:text="有一盯老克勒大大大大大大 左左埒若有若无废物发得发啊大风丸发苦菜霸肘花有AD乏味AD乏味腊月 "
+        android:textColor="@android:color/black"
+        android:textSize="16sp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="稍后再说"
+            android:textSize="15sp"
+            android:textColor="@color/news_tv_source_color"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/updata_cancel_bg"/>
+        <Button
+            android:id="@+id/btn_go"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="立即升级"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/updata_ok_bg"/>
+    </RelativeLayout>
+
+</LinearLayout>

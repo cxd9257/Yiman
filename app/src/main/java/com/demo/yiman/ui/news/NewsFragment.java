@@ -40,6 +40,7 @@ import com.demo.yiman.utils.ToolUtil;
 import com.demo.yiman.widget.ChannelDialogFragment;
 import com.demo.yiman.widget.CustomNestedScrollView;
 import com.demo.yiman.widget.CustomViewPager;
+import com.demo.yiman.widget.UpdataDialogFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -111,6 +112,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         super.bindView(view, savedInstanceState);
         initToolbar(); //暂时没有对Toolbar进行封装
         registerReceiver();
+        checkUpdata();
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             int lastScrollY = 0;
             int h = ToolUtil.dip2px(200, mContext);
@@ -358,6 +360,18 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         ChannelDialogFragment channelDialogFragment = ChannelDialogFragment.newInstance(mSelectedData, mUnSelectedData);
         channelDialogFragment.show(getChildFragmentManager(), "CHANNEL");
     }
+
+    /**
+     * 模拟应用内升级
+     */
+
+    private  void checkUpdata(){
+        if (true){
+            UpdataDialogFragment updataDialogFragment = UpdataDialogFragment.newInstance();
+            updataDialogFragment.show(getChildFragmentManager(),"UPDATA");
+        }
+    }
+
 
     @Override
     public void onDestroyView() {
