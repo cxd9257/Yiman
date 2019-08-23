@@ -1,5 +1,6 @@
 package com.demo.yiman.widget;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,9 +21,12 @@ public class UpdataDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getDialog().getWindow().setWindowAnimations(R.style.diaog_animations);
-        View view = inflater.inflate(R.layout.dialog_updata,null);
-        return view;
+        Dialog dialog = getDialog();
+        if (dialog!=null){
+            dialog.getWindow().setWindowAnimations(R.style.diaog_animations);
+            dialog.setCanceledOnTouchOutside(false);
+        }
+        return inflater.inflate(R.layout.dialog_updata,null);
     }
 
     public static  UpdataDialogFragment newInstance(){

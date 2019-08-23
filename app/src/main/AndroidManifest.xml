@@ -41,7 +41,8 @@
             android:name=".ui.news.NewsDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".ui.SetActivity"

@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,8 +122,19 @@ public abstract class BaseFragment<P extends BasePresenter> extends SupportFragm
     protected void ShowToast(String string){
         ShowToast.showShort(MyApp.getContext(),string);
     }
+    private  static Toast mToast;
     public void showToast(String msg){
-        Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(msg)){
+            return;
+        }
+        if (mToast == null){
+            mToast = Toast.makeText(mContext,msg,Toast.LENGTH_SHORT);
+        }else{
+            mToast.setText(msg);
+            mToast.setDuration(Toast.LENGTH_SHORT);
+        }
+        mToast.show();
+
     }
 
     @Override
