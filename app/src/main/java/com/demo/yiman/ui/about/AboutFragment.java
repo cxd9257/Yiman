@@ -47,7 +47,10 @@ public class AboutFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
 
     }
-
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_about;
+    }
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         super.bindView(view, savedInstanceState);
@@ -99,10 +102,7 @@ public class AboutFragment extends BaseFragment {
     protected BasePresenter createPresenter() {
         return null;
     }
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_about;
-    }
+
     private List<RadarData> getData(){
         List<RadarData> data = new ArrayList<>();
         data.add(new RadarData("android",10));

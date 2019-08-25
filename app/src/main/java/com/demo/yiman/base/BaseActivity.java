@@ -109,6 +109,12 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         if (mPresenter != null){
             mPresenter.detachView();
         }
+        try {
+            if (unbinder != null)
+                unbinder.unbind();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     public void showToast(String msg){
         if (mToast == null) {

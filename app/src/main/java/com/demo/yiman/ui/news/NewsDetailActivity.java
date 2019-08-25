@@ -122,7 +122,7 @@ public class NewsDetailActivity extends BaseActivity {
                 mToolbar.setTitle(source);
             }
         }
-        new QBadgeView(NewsDetailActivity.this).bindTarget(mSumComment).setBadgeGravity(Gravity.END|Gravity.TOP).setBadgeNumber(12).setBadgeBackgroundColor(Color.WHITE).setBadgeTextColor(Color.BLACK).setBadgeTextSize(10,true).setShowShadow(false).setGravityOffset(0,-8,true);
+        new QBadgeView(NewsDetailActivity.this).bindTarget(mSumComment).setBadgeGravity(Gravity.END|Gravity.TOP).setBadgeNumber(12).setBadgeBackgroundColor(Color.WHITE).setBadgeTextColor(Color.RED).setBadgeTextSize(10,true).setShowShadow(false).setGravityOffset(0,-8,true);
     }
 
     /**

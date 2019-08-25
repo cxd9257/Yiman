@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
@@ -17,12 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.demo.yiman.R;
@@ -40,7 +37,7 @@ import com.demo.yiman.utils.ToolUtil;
 import com.demo.yiman.widget.ChannelDialogFragment;
 import com.demo.yiman.widget.CustomNestedScrollView;
 import com.demo.yiman.widget.CustomViewPager;
-import com.demo.yiman.widget.UpdataDialogFragment;
+import com.demo.yiman.widget.UpdateDialogFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -367,8 +364,8 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
 
     private  void checkUpdata(){
         if (true){
-            UpdataDialogFragment updataDialogFragment = UpdataDialogFragment.newInstance();
-            updataDialogFragment.show(getChildFragmentManager(),"UPDATA");
+            UpdateDialogFragment updateDialogFragment = UpdateDialogFragment.newInstance();
+            updateDialogFragment.show(getChildFragmentManager(),"UPDATA");
         }
     }
 

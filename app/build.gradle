@@ -72,6 +72,7 @@ dependencies {
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'q.rorbin:badgeview:1.1.2'
+    implementation 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

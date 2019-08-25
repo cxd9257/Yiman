@@ -30,6 +30,7 @@
         android:textColor="@android:color/black"
         android:textSize="16sp"/>
     <RelativeLayout
+        android:id="@+id/rl_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -53,5 +54,14 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/updata_ok_bg"/>
     </RelativeLayout>
-
+    <com.demo.yiman.widget.CustomProgressBar
+        android:id="@+id/progress_update"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:progress="80"
+        android:visibility="gone"
+        android:progressDrawable="@drawable/progress_red"/>
 </LinearLayout>

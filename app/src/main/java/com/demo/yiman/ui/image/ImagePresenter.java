@@ -4,8 +4,8 @@ import com.demo.yiman.base.baseMVP.BaseObserver;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.bean.ImageModle;
 
-class ImagePresenter extends BasePresenter<ImageView> {
-    public ImagePresenter(ImageView baseView) {
+class ImagePresenter extends BasePresenter<ImageViews> {
+    public ImagePresenter(ImageViews baseView) {
         super(baseView);
     }
 

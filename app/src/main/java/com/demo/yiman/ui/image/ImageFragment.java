@@ -1,14 +1,12 @@
 package com.demo.yiman.ui.image;
 
-import android.graphics.Color;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.demo.yiman.R;
@@ -16,6 +14,9 @@ import com.demo.yiman.base.BaseFragment;
 import com.demo.yiman.bean.ImageModle;
 import com.demo.yiman.ui.adapter.ImageAdapter;
 import com.demo.yiman.ui.joke.ImageBrowseActivity;
+import com.zhouwei.mzbanner.MZBannerView;
+import com.zhouwei.mzbanner.holder.MZHolderCreator;
+import com.zhouwei.mzbanner.holder.MZViewHolder;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,19 +36,24 @@ import in.srain.cube.views.ptr.PtrHandler;
  * 前端就不需要去计算图片宽 耗时而影响用户体验了
  * @param
  */
-public class ImageFragment extends BaseFragment<ImagePresenter> implements ImageView {
+public class ImageFragment extends BaseFragment<ImagePresenter> implements ImageViews {
     @BindView(R.id.ptrClaFrameLayout)
     PtrClassicFrameLayout mPtrClassicFrameLayout;
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
-    @BindView(R.id.tv_title)
-    TextView mTitle;
+    @BindView(R.id.banner)
+    MZBannerView mBanner;
+
+//    @BindView(R.id.toolbar)
+//    Toolbar mToolbar;
+//    @BindView(R.id.tv_title)
+//    TextView mTitle;
     private ImageAdapter mAdapter;
     private List<ImageModle.ResultsBean> mList = new ArrayList<>();;
     private int count=10;
     private int page=1;
+    public static final int[]RESULT = new int[]{R.mipmap.image1,R.mipmap.image2,R.mipmap.image3,R.mipmap.image4,R.mipmap.image5};
+
     private boolean isRemoveHeaderView = false;
     private boolean isLoadMore;//是否是底部加载更多
     public static ImageFragment newInstance(){
@@ -70,7 +76,8 @@ public class ImageFragment extends BaseFragment<ImagePresenter> implements Image
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         super.bindView(view, savedInstanceState);
-        initToolbar();//暂时没有对Toolbar进行封装
+        //initToolbar();//暂时没有对Toolbar进行封装
+        mzBanner();
         mPtrClassicFrameLayout.disableWhenHorizontalMove(true);
         mPtrClassicFrameLayout.setPtrHandler(new PtrHandler() {
             @Override
@@ -107,18 +114,59 @@ public class ImageFragment extends BaseFragment<ImagePresenter> implements Image
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private void initToolbar() {
-        AppCompatActivity mAppCompatActivity = (AppCompatActivity) mContext;
-        mAppCompatActivity.setSupportActionBar(mToolbar);
-        mToolbar.setTitle("");
-        mTitle.setTextColor(Color.WHITE);
-        mTitle.setText(getResources().getString(R.string.title_image));
-    }
+//    private void initToolbar() {
+//        AppCompatActivity mAppCompatActivity = (AppCompatActivity) mContext;
+//        mAppCompatActivity.setSupportActionBar(mToolbar);
+//        mToolbar.setTitle("");
+//        mTitle.setTextColor(Color.WHITE);
+//        mTitle.setText(getResources().getString(R.string.title_image));
+//    }
+    private void mzBanner(){
+        List<Integer> imgList = new ArrayList<>();
+        for (int i =0; i<RESULT.length; i++){
+            imgList.add(RESULT[i]);
+        }
+        mBanner.setPages(imgList, new MZHolderCreator<BannerViewHolder>() {
 
+            @Override
+            public BannerViewHolder createViewHolder() {
+                return new BannerViewHolder();
+            }
+        });
+
+    }
+    public static class BannerViewHolder implements MZViewHolder<Integer> {
+        private ImageView mImageView;
+        @Override
+        public View createView(Context context) {
+            // 返回页面布局文件
+            View view = LayoutInflater.from(context).inflate(R.layout.item_banner,null);
+            mImageView = view.findViewById(R.id.banner_image);
+            return view;
+        }
+
+        @Override
+        public void onBind(Context context, int position, Integer data) {
+            // 数据绑定
+            mImageView.setImageResource(data);
+        }
+    }
     @Override
     public void initData() {
         super.initData();
         mPresenter.getImageData(count,page);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mBanner.pause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mBanner.start();
     }
 
     @Override

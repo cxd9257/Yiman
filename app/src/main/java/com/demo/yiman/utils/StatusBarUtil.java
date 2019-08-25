@@ -420,7 +420,7 @@ public class StatusBarUtil {
     }
 
     /**
-     * 为头部是 ImageView 的界面设置状态栏全透明
+     * 为头部是 ImageViews 的界面设置状态栏全透明
      *
      * @param activity       需要设置的activity
      * @param needOffsetView 需要向下偏移的 View
@@ -430,7 +430,7 @@ public class StatusBarUtil {
     }
 
     /**
-     * 为头部是 ImageView 的界面设置状态栏透明(使用默认透明度)
+     * 为头部是 ImageViews 的界面设置状态栏透明(使用默认透明度)
      *
      * @param activity       需要设置的activity
      * @param needOffsetView 需要向下偏移的 View
@@ -440,7 +440,7 @@ public class StatusBarUtil {
     }
 
     /**
-     * 为头部是 ImageView 的界面设置状态栏透明
+     * 为头部是 ImageViews 的界面设置状态栏透明
      *
      * @param activity       需要设置的activity
      * @param statusBarAlpha 状态栏透明度
@@ -466,7 +466,7 @@ public class StatusBarUtil {
     }
 
     /**
-     * 为 fragment 头部是 ImageView 的设置状态栏透明
+     * 为 fragment 头部是 ImageViews 的设置状态栏透明
      *
      * @param activity       fragment 对应的 activity
      * @param needOffsetView 需要向下偏移的 View
@@ -476,7 +476,7 @@ public class StatusBarUtil {
     }
 
     /**
-     * 为 fragment 头部是 ImageView 的设置状态栏透明
+     * 为 fragment 头部是 ImageViews 的设置状态栏透明
      *
      * @param activity       fragment 对应的 activity
      * @param needOffsetView 需要向下偏移的 View
@@ -486,7 +486,7 @@ public class StatusBarUtil {
     }
 
     /**
-     * 为 fragment 头部是 ImageView 的设置状态栏透明
+     * 为 fragment 头部是 ImageViews 的设置状态栏透明
      *
      * @param activity       fragment 对应的 activity
      * @param statusBarAlpha 状态栏透明度
