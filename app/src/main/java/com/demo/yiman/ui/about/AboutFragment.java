@@ -69,7 +69,6 @@ public class AboutFragment extends BaseFragment {
         });
     }
 
-
     @Override
     public void initData() {
         super.initData();
@@ -92,10 +91,6 @@ public class AboutFragment extends BaseFragment {
         mToolbar.setBackgroundColor(getResources().getColor(R.color.transparent));
         mTitle.setText(getResources().getString(R.string.about));
         mTitleRight.setText(getResources().getString(R.string.set));
-//        mStateBarFixer.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStateBarHeight(getActivity())));//填充状态栏
-//        mStateBarFixer.setFitsSystemWindows(true);
-//
-        //mToolbar.setPadding(0, getStateBarHeight(getActivity()), 0, 0);
 
     }
     @Override
@@ -113,7 +108,4 @@ public class AboutFragment extends BaseFragment {
         data.add(new RadarData("pr",5));
         return data;
     }
-
-
-
 }

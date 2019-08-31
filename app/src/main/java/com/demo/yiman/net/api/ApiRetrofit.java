@@ -32,7 +32,7 @@ public class ApiRetrofit {
      * 请求访问
      * response拦截器
      */
-    private Interceptor interceptor = new Interceptor() {
+    public Interceptor interceptor = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();

@@ -23,10 +23,13 @@
     <string name="emaillUrl">9257cxd@126.com</string>
     <string name="thankUrl">https://github.com/Will-Ls</string>
     <string name="comment_hint">亲，说两句</string>
-    <string name="search_hint">搜免费小说 影视 游戏 App</string>>
+    <string name="search_hint">搜免费小说 影视 游戏 App</string>
 
-    <string name="channel_title">频道管理</string>>
+    <string name="channel_title">频道管理</string>
 
+    <string name="set_account">帐号与安全</string>
+    <string name="set_find_manage">发现页管理</string>
+    <string name="set_update">检查更新</string>
 
     <string-array name="news_channel_name">
         <item>头条</item>

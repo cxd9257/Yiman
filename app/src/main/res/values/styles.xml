@@ -46,7 +46,7 @@
 
     </style>
 
-    <style name="diaog_animations">
+    <style name="dialog_animations">
         <item name="android:windowExitAnimation">@anim/dialog_miss_anim</item>
         
     </style>

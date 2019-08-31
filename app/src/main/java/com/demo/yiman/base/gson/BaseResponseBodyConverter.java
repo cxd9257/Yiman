@@ -28,7 +28,6 @@ public class BaseResponseBodyConverter<T> implements Converter<ResponseBody, T> 
         String jsonString = value.string();
         try{
             JSONObject object = new JSONObject(jsonString);
-            Log.e("xxx","会来吗？");
 //            int status = object.getInt("result");
 //            if (status != 1){
 //                String msg = object.getString("msg");

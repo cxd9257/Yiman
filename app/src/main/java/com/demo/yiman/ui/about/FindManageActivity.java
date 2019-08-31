@@ -1,4 +1,4 @@
-package com.demo.yiman.ui;
+package com.demo.yiman.ui.about;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,12 +15,14 @@ import com.demo.yiman.base.BaseActivity;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.utils.AppConfig;
 import com.demo.yiman.utils.SharePrefUtil;
-import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
-public class SetActivity extends BaseActivity {
+public class FindManageActivity extends BaseActivity {
+    @BindView(R.id.sw_shop)
+    Switch mShop;
+    @BindView(R.id.sw_game)
+    Switch mGame;
     @BindView(R.id.tv_title)
     TextView mTitle;
     @BindView(R.id.tv_tool_right)
@@ -34,7 +36,7 @@ public class SetActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_set;
+        return R.layout.activity_find_manage;
     }
 
     @Override
@@ -45,7 +47,42 @@ public class SetActivity extends BaseActivity {
         setTitle(getResources().getString(R.string.set_btn));
         mToolbar.setTitle("");
         setTitleBack(true);
+        SwichState();
     }
+    private void SwichState(){
+        if (SharePrefUtil.getBoolean(AppConfig.JiCaiBtn)){
+            mGame.setChecked(true);
+        }
+        if (SharePrefUtil.getBoolean(AppConfig.ShopBtn)){
+            mShop.setChecked(true);
+        }
+        mShop.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    SharePrefUtil.putBoolean(AppConfig.ShopBtn,true);
+                    SharePrefUtil.commit();
+                }else{
+                    SharePrefUtil.putBoolean(AppConfig.ShopBtn,false);
+                    SharePrefUtil.commit();
+                }
+            }
+        });
+        mGame.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    SharePrefUtil.putBoolean(AppConfig.JiCaiBtn,true);
+                    SharePrefUtil.commit();
+                }else{
+                    SharePrefUtil.putBoolean(AppConfig.JiCaiBtn,false);
+                    SharePrefUtil.commit();
+                }
+            }
+        });
+
+    }
+
 
     protected void setTitle(String title) {
         if (!TextUtils.isEmpty(title)) {

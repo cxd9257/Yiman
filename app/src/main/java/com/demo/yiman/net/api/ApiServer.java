@@ -6,11 +6,16 @@ import com.demo.yiman.bean.NewsDetailModle;
 import com.demo.yiman.bean.NewsWeather;
 import com.demo.yiman.book.BookModle;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  * 怎么使用动态URLs
@@ -44,4 +49,11 @@ public interface ApiServer {
      */
     @GET("http://gank.io/api/data/%E7%A6%8F%E5%88%A9/{count}/{page}")
     Observable<ImageModle> getImageDate(@Path("count") int count, @Path("page") int page);
+
+    /**
+     * 更新app
+     */
+    @Streaming
+    @GET
+    Observable<ResponseBody> download(@Url String url);
 }

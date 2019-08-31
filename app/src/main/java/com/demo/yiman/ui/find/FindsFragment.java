@@ -18,6 +18,7 @@ import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.net.ApiConfig;
 import com.demo.yiman.ui.SetActivity;
 import com.demo.yiman.ui.WebViewActivity;
+import com.demo.yiman.ui.about.FindManageActivity;
 import com.demo.yiman.utils.AppConfig;
 import com.demo.yiman.utils.SharePrefUtil;
 import com.demo.yiman.utils.StatusBarUtil;
@@ -121,7 +122,7 @@ public class FindsFragment extends BaseFragment {
     }
 
     private void goSet(){
-        Intent intent = new Intent(mContext,SetActivity.class);
+        Intent intent = new Intent(mContext, FindManageActivity.class);
         startActivity(intent);
     }
     @Override
