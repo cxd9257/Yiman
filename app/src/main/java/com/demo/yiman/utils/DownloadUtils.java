@@ -93,11 +93,10 @@ public class DownloadUtils {
     /**
      * 开始下载
      */
-    public static final String PATH_CHALLENGE_APK = Environment.getExternalStorageDirectory() + "/DownloadFileTwo";
+    private static String directoryPath="";
     private String mApkPath; //下载到本地的Apk路径
     private File mFile;
     public void downLoad(String url, final JsDownloadListener downloadUrl){
-        String directoryPath="";
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ) {//判断外部存储是否可用
             directoryPath = getContext().getExternalFilesDir("apk").getAbsolutePath();
         }else{//没外部存储就使用内部存储
@@ -107,8 +106,7 @@ public class DownloadUtils {
         if (!mFile.exists() || !mFile.isDirectory()) {
             mFile.mkdirs();
         }
-        //通过Url得到保存到本地的文件名
-        String name = url;
+        String name = url;//通过Url得到保存到本地的文件名
         int index = name.lastIndexOf('/');//一定是找最后一个'/'出现的位置
         if (index != -1) {
             name = name.substring(index);
@@ -123,7 +121,6 @@ public class DownloadUtils {
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Log.e("dsd","dad11");
                     }
 
                     @Override
@@ -146,13 +143,11 @@ public class DownloadUtils {
 
                     @Override
                     public void onComplete() {
-                        Log.e("dsd","success");
                     }
                 });
     }
-    public void writeFileSDcard(ResponseBody responseBody, File mFile, JsDownloadListener downloadListener) {
 
-        Log.d(TAG,"writeFileSDcard");
+    public void writeFileSDcard(ResponseBody responseBody, File mFile, JsDownloadListener downloadListener) {
         long currentLength = 0;
         OutputStream os = null;
         InputStream is = responseBody.byteStream();
