@@ -6,7 +6,6 @@ import android.util.Log;
 import com.demo.yiman.base.gson.BaseConverterFacory;
 import com.demo.yiman.net.ApiConfig;
 import com.demo.yiman.net.api.ApiServer;
-import com.demo.yiman.ui.update.JsDownloadInterceptor;
 import com.demo.yiman.ui.update.JsDownloadListener;
 
 
@@ -19,13 +18,9 @@ import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -39,16 +34,17 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static org.litepal.LitePalApplication.getContext;
 
+/**
+ * RxRetrofit2
+ * 方便独立出来引用，故没有使用之前封装的
+ */
 public class DownloadUtils {
     private static final String TAG = "DownloadUtils";
     private static final int DEFAULT_TIMEOUT = 10;
-
     private Thread mThread;//子线程进行io读写操作
-
     private Retrofit retrofit;
     private JsDownloadListener listener;
     private String baseUrl;
-    private String downloadUrl;
     /**
      * 请求访问
      * response拦截器
@@ -73,7 +69,6 @@ public class DownloadUtils {
     public DownloadUtils(String baseUrl, JsDownloadListener listener){
         this.baseUrl = baseUrl;
         this.listener = listener;
-        JsDownloadInterceptor mInterceptor = new JsDownloadInterceptor(listener);
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .retryOnConnectionFailure(true)

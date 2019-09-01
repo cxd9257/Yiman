@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 
 import com.demo.yiman.R;
 import com.demo.yiman.base.BaseDialogFragment;
-import com.demo.yiman.base.baseMVP.BaseModel;
 import com.demo.yiman.ui.update.Contract;
 import com.demo.yiman.ui.update.JsDownloadListener;
 import com.demo.yiman.ui.update.UpdataPresenter;
