@@ -57,7 +57,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     @BindView(R.id.SlidingTabLayout)
     com.flyco.tablayout.SlidingTabLayout mSlidingTabLayout;
     @BindView(R.id.SlidingTabLayoutTitle)//用于划动隐藏显示指示器
-            com.flyco.tablayout.SlidingTabLayout mSlidingTabLayoutTitle;
+    com.flyco.tablayout.SlidingTabLayout mSlidingTabLayoutTitle;
     @BindView(R.id.nes_scroll_view)
     CustomNestedScrollView mScrollView;
     @BindView(R.id.gv_top_content)
@@ -206,7 +206,6 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
         @Override
         public void onReceive(Context context, Intent intent) {
             String refresh= intent.getStringExtra("refresh");
-            Log.e("来了吖","妖怪吧");
             if ("yes".equals(refresh)) {
                 new Handler().post(new Runnable() {
                     public void run() {
@@ -308,7 +307,7 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
     }
 
     private void dealWithViewPager() {
-        toolBarPositionY = mToolbar.getHeight() + ToolUtil.getStateBarHeight(getActivity());
+        toolBarPositionY = mToolbar.getHeight() + ToolUtil.getStateBarHeight(getActivity())+45;
         ViewGroup.LayoutParams params = mViewPager.getLayoutParams();
         params.height = ScreenUtil.getScreenHeightPx(mContext) - toolBarPositionY - mSlidingTabLayout.getHeight() - ToolUtil.getStateBarHeight(getActivity()) + 1;
         mViewPager.setLayoutParams(params);
