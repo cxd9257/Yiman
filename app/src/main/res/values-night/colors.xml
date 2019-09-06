@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#33373e</color>
+    <color name="colorPrimaryDark">#33373e</color>
+    <color name="colorAccent">#008577</color>
+    <!-- 整体背景 -->
+    <color name="bg_theme">#33373e</color>
+    <!-- 点击按钮颜色 -->
+    <color name="bg_selected">#22252a</color>
+    <color name="bg_unselected">#2a2d33</color>
+    <!-- 主字体暗白色 -->
+    <color name="btn_text">#dee4ee</color>
+    <!-- 底部导航背景 -->
+    <color name="bg_menu">#34373d</color>
+</resources>

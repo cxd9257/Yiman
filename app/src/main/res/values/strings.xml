@@ -29,6 +29,7 @@
 
     <string name="set_account">帐号与安全</string>
     <string name="set_find_manage">发现页管理</string>
+    <string name="set_night">夜间模式</string>
     <string name="set_update">检查更新</string>
 
     <string-array name="news_channel_name">

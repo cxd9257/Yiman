@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bg_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,10 +16,9 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
     <TextView
         android:id="@+id/iv_shop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:text="@string/set_account"
+        style="@style/btn_Name"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -49,8 +47,7 @@
 
         <TextView
             android:id="@+id/iv_game"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/btn_Name"
             android:layout_marginLeft="15dp"
             android:text="@string/set_find_manage"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -87,8 +84,7 @@
 
         <TextView
             android:id="@+id/tv_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/btn_Name"
             android:layout_marginLeft="15dp"
             android:text="@string/set_update"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -113,6 +109,46 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@id/tv_update"
             app:layout_constraintStart_toStartOf="@+id/tv_name2"
+            app:layout_constraintTop_toBottomOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_four"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ll_customer_selector"
+        app:layout_constraintTop_toBottomOf="@+id/cl_third">
+
+        <TextView
+            android:id="@+id/iv_the_night"
+            style="@style/btn_Name"
+            android:layout_marginLeft="15dp"
+            android:text="@string/set_night"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/sw_night"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_go"
+            android:checked="false"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_the_night"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_the_night"/>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:background="@color/bg_theme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/iv_the_night"
+            app:layout_constraintStart_toStartOf="@+id/iv_the_night"
             app:layout_constraintTop_toBottomOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
