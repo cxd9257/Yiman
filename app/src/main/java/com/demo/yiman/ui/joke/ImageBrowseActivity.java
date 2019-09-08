@@ -62,6 +62,11 @@ public class ImageBrowseActivity extends BaseActivity {
     }
 
     @Override
+    protected void restoreSaveInstanceState(Bundle savedInstanceState) {
+
+    }
+
+    @Override
     public void bindView(View view, Bundle savedInstanceState) {
         //setStatusBarColor(ContextCompat.getColor(this, android.R.color.black),150);
         StatusBarUtil.setTranslucentForImageView(this,0 , null);

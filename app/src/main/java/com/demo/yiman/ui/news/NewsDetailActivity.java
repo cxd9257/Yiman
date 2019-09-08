@@ -44,6 +44,11 @@ public class NewsDetailActivity extends BaseActivity {
     }
 
     @Override
+    protected void restoreSaveInstanceState(Bundle savedInstanceState) {
+
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.activity_news_detail_web;
     }

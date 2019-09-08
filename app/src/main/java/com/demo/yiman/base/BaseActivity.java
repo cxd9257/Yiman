@@ -5,11 +5,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,8 @@ import com.demo.yiman.R;
 import com.demo.yiman.base.baseMVP.BaseModel;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.base.baseMVP.BaseView;
+import com.demo.yiman.utils.AppConfig;
+import com.demo.yiman.utils.SharePrefUtil;
 import com.demo.yiman.utils.StatusBarUtil;
 
 import java.lang.reflect.Field;
@@ -38,6 +42,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
     protected abstract P createPresenter();
     private  static Toast mToast;
     protected BGASwipeBackHelper mSwipeBackHelper;
+    private boolean mNowMode;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         initSwipeBackFinish();
@@ -45,13 +50,19 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         mRootView = createView(null,null,savedInstanceState);
         mContext = this;
         setContentView(mRootView);
+        mNowMode = SharePrefUtil.getBoolean(AppConfig.NIGHT);
         mPresenter = createPresenter();
         unbinder = ButterKnife.bind(this);
         bindView(mRootView,savedInstanceState);
         initView();
-        initData();
-    }
+        if (savedInstanceState == null){
+            initData();
+        }else{
+            restoreSaveInstanceState(savedInstanceState);
+        }
 
+    }
+  protected abstract void restoreSaveInstanceState(Bundle savedInstanceState);
     protected void setStatusBar() {
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
     }
@@ -146,6 +157,22 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        theme();
+    }
+
+    protected void theme(){
+        if (SharePrefUtil.getBoolean(AppConfig.NIGHT) != mNowMode){
+            if (SharePrefUtil.getBoolean(AppConfig.NIGHT)){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+            recreate();
+        }
+    }
     @Override
     public void showError(String msg) {
         showToast(msg);

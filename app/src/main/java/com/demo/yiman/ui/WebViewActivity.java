@@ -35,6 +35,11 @@ public class WebViewActivity extends BaseActivity {
     }
 
     @Override
+    protected void restoreSaveInstanceState(Bundle savedInstanceState) {
+
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.activity_web;
     }

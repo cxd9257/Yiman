@@ -47,6 +47,11 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
+    protected void restoreSaveInstanceState(Bundle savedInstanceState) {
+
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.activity_splash;
     }

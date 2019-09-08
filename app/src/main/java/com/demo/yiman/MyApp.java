@@ -1,7 +1,10 @@
 package com.demo.yiman;
 
+import android.support.v7.app.AppCompatDelegate;
+
 import com.demo.yiman.database.YimanDbOpenHelper;
 import com.demo.yiman.utils.AppConfig;
+import com.demo.yiman.utils.SharePrefUtil;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
@@ -21,7 +24,11 @@ public class MyApp extends LitePalApplication {
         Beta.autoCheckUpgrade = true;
         Bugly.init(getApplicationContext(), AppConfig.BUGLY_KEY,false);
         YimanDbOpenHelper.initDataBase();
-
+        if (SharePrefUtil.getBoolean("night")){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     public synchronized static MyApp getInstance() {

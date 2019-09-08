@@ -5,16 +5,23 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.demo.yiman.R;
 import com.demo.yiman.base.BaseFragment;
 import com.demo.yiman.base.baseMVP.BasePresenter;
+import com.demo.yiman.event.NightEvent;
 import com.demo.yiman.ui.SetActivity;
 import com.demo.yiman.widget.RadarData;
 import com.demo.yiman.widget.RadarView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +54,12 @@ public class AboutFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_about;
@@ -107,5 +120,20 @@ public class AboutFragment extends BaseFragment {
         data.add(new RadarData("ps",6));
         data.add(new RadarData("pr",5));
         return data;
+    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)  //EventBus事件
+//    public void nightEvent(NightEvent event){
+//        Log.e("ssss",event.aBoolean+"");
+//        if (event.aBoolean == true){
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//        }else{
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//        }
+//        getActivity().recreate();
+//    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }
