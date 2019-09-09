@@ -12,7 +12,7 @@ public class AppConfig {
     public static final String BUGLY_KEY = "99af23e8-8149-470b-8eba-55ad493b72e1";
     public static final String DB_NAME = "jianyue.db";
     public static final String NIGHT = "night";
-
+    public static final String DATE = "date";
     public static void setWebView(WebView webView){
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setSupportZoom(true);

@@ -59,6 +59,12 @@
             android:theme="@style/AppTheme.Transparent">
         </activity>
         <activity
+            android:name=".ui.about.FindManageActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
             android:name=".ui.joke.ImageBrowseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent"

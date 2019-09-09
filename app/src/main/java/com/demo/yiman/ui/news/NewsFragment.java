@@ -34,7 +34,9 @@ import com.demo.yiman.event.NightEvent;
 import com.demo.yiman.event.SelectChannelEvent;
 import com.demo.yiman.ui.adapter.ChannelPagerAdapter;
 import com.demo.yiman.ui.adapter.NewTopDataAdapter;
+import com.demo.yiman.utils.AppConfig;
 import com.demo.yiman.utils.ScreenUtil;
+import com.demo.yiman.utils.SharePrefUtil;
 import com.demo.yiman.utils.ToolUtil;
 import com.demo.yiman.widget.ChannelDialogFragment;
 import com.demo.yiman.widget.CustomNestedScrollView;
@@ -45,7 +47,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -361,10 +365,13 @@ public class NewsFragment extends BaseFragment<NewsChannelPresenter> implements 
 
     /**
      * 模拟应用内升级
+     * 每天只弹出一次升级提示
+     * 最优的做法是调接口，因系统时间用户可以自己修改。
      */
 
     private  void checkUpdata(){
-        if (true){
+        String newDate = ToolUtil.getDate();
+        if (!newDate.equals(SharePrefUtil.getString(AppConfig.DATE))&&true){  //true表示有新版本
             UpdateDialogFragment updateDialogFragment = UpdateDialogFragment.newInstance();
             updateDialogFragment.show(getChildFragmentManager(),"UPDATA");
         }

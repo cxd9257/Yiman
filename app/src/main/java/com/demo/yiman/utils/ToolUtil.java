@@ -3,6 +3,9 @@ package com.demo.yiman.utils;
 import android.app.Activity;
 import android.content.Context;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ToolUtil {
     public static int getStateBarHeight(Activity a) {
         int result = 0;
@@ -35,6 +38,14 @@ public class ToolUtil {
         float density = context.getResources().getDisplayMetrics().density;
         float dp = px / density;
         return dp;
+    }
+    /**
+     * 获取当前日期
+     */
+    public static String getDate(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");// HH:mm:ss
+        Date date = new Date(System.currentTimeMillis());//获取当前时间
+        return simpleDateFormat.format(date);
     }
 
 }

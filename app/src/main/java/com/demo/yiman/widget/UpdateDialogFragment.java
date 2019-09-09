@@ -19,9 +19,14 @@ import com.demo.yiman.base.BaseDialogFragment;
 import com.demo.yiman.ui.update.Contract;
 import com.demo.yiman.ui.update.JsDownloadListener;
 import com.demo.yiman.ui.update.UpdataPresenter;
+import com.demo.yiman.utils.AppConfig;
+import com.demo.yiman.utils.SharePrefUtil;
 import com.demo.yiman.utils.ShowToast;
+import com.demo.yiman.utils.ToolUtil;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -79,6 +84,8 @@ public class UpdateDialogFragment extends BaseDialogFragment<UpdataPresenter> im
     public void onClickView(View view) {
         switch (view.getId()) {
             case R.id.btn_cancel:
+                SharePrefUtil.putString(AppConfig.DATE, ToolUtil.getDate());
+                SharePrefUtil.commit();
                 dismiss();
                 break;
             case R.id.btn_go:

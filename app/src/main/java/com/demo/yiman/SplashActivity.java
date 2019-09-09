@@ -13,7 +13,10 @@ import com.demo.yiman.base.BaseActivity;
 import com.demo.yiman.base.baseMVP.BasePresenter;
 import com.demo.yiman.utils.AppConfig;
 import com.demo.yiman.utils.ImageLoaderUtil;
+import com.demo.yiman.utils.SharePrefUtil;
 import com.demo.yiman.utils.StatusBarUtil;
+import com.demo.yiman.utils.ToolUtil;
+import com.demo.yiman.widget.UpdateDialogFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -88,11 +91,13 @@ public class SplashActivity extends BaseActivity {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
         }
+        /**
+         * 第一次启动去引导图页面
+         */
         if (isFirstStart()) {
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
             finish();
-
         }else{
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
@@ -115,6 +120,7 @@ public class SplashActivity extends BaseActivity {
         } else {
             return false;
         }
+
     }
     @Override
     protected void onDestroy() {

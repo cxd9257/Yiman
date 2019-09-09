@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatDelegate;
 import com.demo.yiman.database.YimanDbOpenHelper;
 import com.demo.yiman.utils.AppConfig;
 import com.demo.yiman.utils.SharePrefUtil;
+import com.demo.yiman.utils.ToolUtil;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
