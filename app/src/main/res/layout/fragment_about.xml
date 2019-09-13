@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_first"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_theme">
 
     <include
         layout="@layout/layout_toolbar"
@@ -38,7 +39,7 @@
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
         android:textSize="@dimen/radarTextSize"
-        android:textColor='@color/colorAccent'
+        android:textColor='@color/btn_text'
         app:layerColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +56,7 @@
         android:layout_marginEnd="83dp"
         android:layout_marginStart="15dp"
         android:text="Contacts"
-        android:textColor="@android:color/black"
+        android:textColor="@color/title_text"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvBlog"
@@ -69,7 +70,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="#3c3c3c"
+        android:textColor="@color/btn_text"
         app:layout_constraintEnd_toEndOf="@+id/radarView"
         app:layout_constraintStart_toStartOf="@+id/radarView"
         app:layout_constraintTop_toBottomOf="@+id/radarView"/>
@@ -119,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/willUrl"
-        android:textColor="#3c3c3c"
+        android:textColor="@color/btn_text"
         android:textIsSelectable="true"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvBlog"
         app:layout_constraintStart_toEndOf="@+id/tvContacts"/>
@@ -129,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/githubUrl"
-        android:textColor="#3c3c3c"
+        android:textColor="@color/btn_text"
         android:textIsSelectable="true"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvGithub"
         app:layout_constraintStart_toEndOf="@+id/tvContacts"/>
@@ -139,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/emaillUrl"
-        android:textColor="#3c3c3c"
+        android:textColor="@color/btn_text"
         android:textIsSelectable="true"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvEmail"
         app:layout_constraintStart_toEndOf="@+id/tvContacts"/>
@@ -149,7 +150,7 @@
         android:layout_height="wrap_content"
         android:textIsSelectable="true"
         android:text="@string/thankUrl"
-        android:textColor="#3c3c3c"
+        android:textColor="@color/btn_text"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvThanks"
         app:layout_constraintStart_toEndOf="@+id/tvContacts"/>
 

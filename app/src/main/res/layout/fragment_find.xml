@@ -9,7 +9,7 @@
         android:id="@+id/fake_status_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/statusbar_view_height"
-        android:background="@color/bg_theme"
+        android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <include
@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:text="@string/find_shop"
+            android:textColor="@color/btn_text"
             app:layout_constraintBottom_toBottomOf="@id/iv_shop"
             app:layout_constraintLeft_toRightOf="@id/iv_shop"
             app:layout_constraintTop_toTopOf="@id/iv_shop" />
@@ -92,6 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:text="@string/find_game"
+            android:textColor="@color/btn_text"
             app:layout_constraintBottom_toBottomOf="@id/iv_game"
             app:layout_constraintLeft_toRightOf="@id/iv_game"
             app:layout_constraintTop_toTopOf="@id/iv_game" />

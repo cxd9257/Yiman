@@ -34,8 +34,6 @@ public class JokeDefaultAdapter extends BaseQuickAdapter<JokeModle.ResultBean, B
         this.mContext = context;
     }
 
-
-
     @Override
     protected void convert(BaseViewHolder helper, final JokeModle.ResultBean item) {
         String type = item.getType();
@@ -90,9 +88,6 @@ public class JokeDefaultAdapter extends BaseQuickAdapter<JokeModle.ResultBean, B
             helper.setGone(R.id.tv_top_comment,false);
             helper.setGone(R.id.tv_top_name,false);
         }
-
-
-
     }
 
     @Override

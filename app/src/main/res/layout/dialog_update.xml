@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:gravity="center"
     android:padding="20dp"
+    android:background="@color/bg_content"
     android:layout_height="match_parent">
 
     <ImageView
@@ -27,7 +28,7 @@
         android:layout_marginTop="10dp"
         android:gravity="left"
         android:text="有一盯老克勒大大大大大大 左左埒若有若无废物发得发啊大风丸发苦菜霸肘花有AD乏味AD乏味腊月 "
-        android:textColor="@android:color/black"
+        android:textColor="@color/btn_text"
         android:textSize="16sp"/>
     <RelativeLayout
         android:id="@+id/rl_btn"
@@ -41,9 +42,10 @@
             android:layout_height="30dp"
             android:text="稍后再说"
             android:textSize="15sp"
-            android:textColor="@color/news_tv_source_color"
+            android:textColor="@color/btn_text"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/updata_cancel_bg"/>
+            android:background="@drawable/update_cancel_bg"
+            style="?android:attr/borderlessButtonStyle"/>
         <Button
             android:id="@+id/btn_go"
             android:layout_width="100dp"
@@ -52,7 +54,7 @@
             android:textSize="15sp"
             android:textColor="@android:color/white"
             android:layout_alignParentRight="true"
-            android:background="@drawable/updata_ok_bg"/>
+            android:background="@drawable/update_ok_bg"/>
     </RelativeLayout>
     <com.demo.yiman.widget.CustomProgressBar
         android:id="@+id/progress_update"

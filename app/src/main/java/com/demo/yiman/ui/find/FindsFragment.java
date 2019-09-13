@@ -71,8 +71,6 @@ public class FindsFragment extends BaseFragment {
         AppCompatActivity mAppCompatActivity = (AppCompatActivity) mContext;
         mAppCompatActivity.setSupportActionBar(mToolbar);
         mToolbar.setTitle("");
-        mToolbar.setBackgroundColor(getResources().getColor(R.color.bg_theme));
-        mTitle.setTextColor(Color.BLACK);
         mTitle.setText(getResources().getString(R.string.title_find));
 
         ConstraintLayout.LayoutParams params=new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getStateBarHeight(getActivity()));

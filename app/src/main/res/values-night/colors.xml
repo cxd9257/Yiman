@@ -4,13 +4,18 @@
     <color name="colorPrimary">#33373e</color>
     <color name="colorPrimaryDark">#33373e</color>
     <color name="colorAccent">#33373e</color>
+    <color name="bg_content">#33373e</color>
     <!-- 整体背景 -->
     <color name="bg_theme">#33373e</color>
+    <!-- 取消按钮背景-->
+    <color name="btn_bg">#22252a</color>
     <!-- 点击按钮颜色 -->
     <color name="bg_selected">#22252a</color>
     <color name="bg_unselected">#2a2d33</color>
     <!-- 主字体暗白色 -->
     <color name="btn_text">#dee4ee</color>
+    <!-- 黑色标题 -->
+    <color name="title_text">#dee4ee</color>
     <!-- 底部导航背景 -->
     <color name="bg_menu">#34373d</color>
     <!-- Toolbar字体颜色-->

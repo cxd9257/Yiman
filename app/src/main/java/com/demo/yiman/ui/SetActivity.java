@@ -60,7 +60,7 @@ public class SetActivity extends BaseActivity {
         super.initView();
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
-        setTitle(getResources().getString(R.string.set_btn));
+        setTitle(getResources().getString(R.string.set));
         mToolbar.setTitle("");
         setTitleBack(true);
     }
@@ -92,7 +92,11 @@ public class SetActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                startActivity(new Intent(this, MainActivity.class));
+                Bundle datain = new Bundle();
+                datain.putInt("flag",2);
+                Intent intent = new Intent(this,MainActivity.class);
+                intent.putExtras(datain);
+                startActivity(intent);
                 finish();
                 break;
         };

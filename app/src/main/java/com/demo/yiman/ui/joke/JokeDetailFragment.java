@@ -15,6 +15,7 @@ import com.demo.yiman.bean.JokeModle;
 import com.demo.yiman.widget.CustomLoadMoreView;
 
 import butterknife.BindView;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
@@ -126,4 +127,12 @@ public class JokeDetailFragment extends BaseFragment<JokePresenter> implements J
             mAdapter.loadMoreComplete();
         }
     }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+    }
+
 }

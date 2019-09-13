@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity {
         Intent intent = getIntent();
         try{
             if (intent.getExtras() != null){
-                if (intent.getExtras().getInt("flag") == 1){
+                if (intent.getExtras().getInt("flag") == 1 && intent.getExtras().getInt("flag") == 2){
                     setFragmentPosition(4);
                     endIndex = 4;
                     navView.setSelectedItemId(R.id.navigation_me);
@@ -124,7 +124,7 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_jc:
                     setFragmentPosition(2);
                     endIndex =2;
-                    com.jaeger.library.StatusBarUtil.setLightMode(MainActivity.this);
+                    com.jaeger.library.StatusBarUtil.setDarkMode(MainActivity.this);
                     break;
                 case R.id.navigation_joke:
                     setFragmentPosition(3);
@@ -180,6 +180,7 @@ public class MainActivity extends BaseActivity {
     public void initData() {
         super.initData();
     }
+
 
     @Override
     public void onBackPressedSupport() {
