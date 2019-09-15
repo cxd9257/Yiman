@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/bg_theme"
     android:padding="8dp">
 
     <TextView
@@ -67,7 +68,7 @@
 
     <TextView
         android:id="@+id/tv_news_date"
-        style="@style/Text_Tips"
+        style="@style/Data_Tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"

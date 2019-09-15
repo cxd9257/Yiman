@@ -7,8 +7,8 @@
     <color name="transparent">@android:color/transparent</color>
 
     <color name="bg_images">#E8E8E8</color>
-    <color name="news_tv_source_color">#a3a3a3</color>
-
+    <color name="news_tv_source_color">#1c96d3</color>
+    <color name="news_tv_data_color">#a3a3a3</color>
     <color name="bg_menu">#ffffff</color>
 
     <color name="bg_theme">#ededed</color>
@@ -19,10 +19,13 @@
     <color name="bg_text">#bfbfbf</color>
     <!-- 取消按钮背景-->
     <color name="btn_bg">#a3a3a3</color>
+    <!-- 灰色字体颜色 hind、未选中、日期时间内容等-->
+    <color name="grayColor">#808080</color>
     <color name="btn_text">#2b2b2b</color>
     <!-- Toolbar字体颜色-->
     <color name="toolbarColor">#ffffff</color>
-
+    <!-- 搜索框背景颜色-->
+    <color name="searchBg">#ffffff</color>
     <!-- 黑色标题 -->
     <color name="title_text">#000000</color>
 

@@ -18,7 +18,7 @@
         android:background="@color/colorPrimary"
         app:tabIndicatorColor="@android:color/white"
         app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="@color/bg_content"
+        app:tabTextColor="@color/grayColor"
         app:layout_constraintTop_toBottomOf="@+id/fake_status_bar"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

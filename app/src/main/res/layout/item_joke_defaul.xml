@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/bg_theme"
     android:padding="10dp">
     <!--尝试在同xml引用四种布局
     txt,image,gif,video-->
@@ -47,6 +48,7 @@
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="255"
+        android:textColor="@color/grayColor"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@id/iv_header"
         app:layout_constraintTop_toBottomOf="@id/include_context" />
@@ -60,6 +62,7 @@
         android:drawablePadding="5dp"
         android:gravity="center"
         android:text="255"
+        android:textColor="@color/grayColor"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_smile"
         app:layout_constraintLeft_toRightOf="@+id/tv_smile"
@@ -74,6 +77,7 @@
         android:drawablePadding="5dp"
         android:gravity="center"
         android:text="255"
+        android:textColor="@color/grayColor"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_smile"
         app:layout_constraintLeft_toRightOf="@+id/tv_cry"
@@ -89,6 +93,7 @@
         android:gravity="center"
         android:text="@string/share"
         android:textSize="10sp"
+        android:textColor="@color/grayColor"
         app:layout_constraintBottom_toBottomOf="@+id/tv_smile"
         app:layout_constraintLeft_toRightOf="@+id/tv_comment"
         app:layout_constraintTop_toTopOf="@+id/tv_smile" />
